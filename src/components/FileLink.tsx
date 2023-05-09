@@ -25,6 +25,9 @@ const StyledLink = styled.a`
 const StyledTitle = styled.p`
   font-size: 16px;
   font-weight: 700;
+  @media (max-width: 700px) {
+    font-size: 12px;
+  }
 `;
 const StyledDownloadIcon = styled.img`
   width: 30px;
