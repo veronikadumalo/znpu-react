@@ -1,8 +1,6 @@
-interface FileLink {
-  title: string;
-  link: string;
-}
-export const BOOKS: FileLink[] = [
+import { LinkData } from "../../types/general";
+
+export const BOOKS: LinkData[] = [
   {
     title:
       "JĘZYK POLSKI. Podręcznik dla klasy 4 szkół ogólnokształcących z ukraińskim językiem wykładowym. /Helena Wojcewa Tatiana Buczacka/",

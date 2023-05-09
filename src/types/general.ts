@@ -23,3 +23,7 @@ export interface DepartmentPerson {
   name: string;
   email?: string;
 }
+export interface LinkData {
+  title: string;
+  link: string;
+}
