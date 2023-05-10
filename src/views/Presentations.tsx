@@ -25,11 +25,11 @@ const Presentations = () => {
       <StyledContainer>
         <SubMenu submenuItems={NAVIGATION[5].subpages} />
         <StyledContent>
-          {PRESENTATIONS.map((book) => (
+          {PRESENTATIONS.map((file) => (
             <FileLink
-              key={book.title}
-              fileLink={book.link}
-              title={book.title}
+              key={file.title}
+              fileLink={file.link}
+              title={file.title}
             />
           ))}
         </StyledContent>
