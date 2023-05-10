@@ -13,6 +13,9 @@ const StyledContent = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 20px;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const CalendarAndThemePlanning = () => {

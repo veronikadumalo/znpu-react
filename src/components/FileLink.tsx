@@ -33,6 +33,10 @@ const StyledDownloadIcon = styled.img`
   width: 30px;
   height: 30px;
   margin-left: 20px;
+  @media (max-width: 700px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const FileLink = ({
