@@ -70,13 +70,17 @@ const OlympiadTasks = () => {
               <StyledOlympiadTitle>{item.title}</StyledOlympiadTitle>
               <StyledOlympiadYears>{item.years}</StyledOlympiadYears>
               <FileContainer>
-                {item.files.map((file) => (
-                  <FileLink
-                    key={file.link}
-                    fileLink={file.link}
-                    title={file.title}
-                  />
-                ))}
+                {item.files.map((file) => {
+                  console.log(file.link.length);
+                  return (
+                    <FileLink
+                      key={file.link}
+                      fileLink={file.link}
+                      title={file.title}
+                      isDisabled={!file.link.length}
+                    />
+                  );
+                })}
               </FileContainer>
               <StyledOpympiadSubtitle>Ключі</StyledOpympiadSubtitle>
               <FileContainer>
@@ -85,6 +89,7 @@ const OlympiadTasks = () => {
                     key={file.link}
                     fileLink={file.link}
                     title={file.title}
+                    isDisabled={!file.link.length}
                   />
                 ))}
               </FileContainer>
