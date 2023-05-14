@@ -22,7 +22,7 @@ const PolishLanguage = () => {
         <StyledContent>
           <FileLink
             isFileDownload={false}
-            fileLink="/Druha.inoz.mov.5-9-kl.Redko.ta.in.14.07.pdf"
+            fileLink="/znpu-react/Druha.inoz.mov.5-9-kl.Redko.ta.in.14.07.pdf"
             title="Модельна навчальна програма «Друга іноземна мова. 5-9 класи» для закладів загальної середньої освіти (автори Редько В. Г., Шаленко О. П., Сотникова С. І., Коваленко О. Я., Коропецька І. Б., Якоб О. М., Самойлюкевич І. В., Добра О. М., Кіор Т. М., Мацькович М. Р., Глинюк Л. М., Браун Є. Л.)"
           />
         </StyledContent>

@@ -49,8 +49,8 @@ const Statute = () => {
             Zjednoczenie Nauczycieli Polskich na Ukrainie – witamy!
           </StyledTitle>
           <StyledStatuteContent>{STATUTE}</StyledStatuteContent>
-          <FileLink fileLink="/statut.docx" title="Statut " />
-          <FileLink fileLink="/Статут.doc" title="Статут" />
+          <FileLink fileLink="/znpu-react/statut.docx" title="Statut " />
+          <FileLink fileLink="/znpu-react/Статут.doc" title="Статут" />
         </StyledContent>
       </StyledContainer>
     </Layout>

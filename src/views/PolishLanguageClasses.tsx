@@ -22,27 +22,27 @@ const PolishLanguageClasses = () => {
         <StyledContent>
           <FileLink
             isFileDownload={false}
-            fileLink="/files/Geografia.pdf"
+            fileLink="/znpu-react/files/Geografia.pdf"
             title="Програма ДЛЯ ЗАГАЛЬНООСВІТНІХ НАВЧАЛЬНИХ ЗАКЛАДІВ. Географія Польщі 5-6 клас, 10 -11 клас факультативний курс/ курс за вибором. Автор: Шпроцер Н.І."
           />
           <FileLink
             isFileDownload={false}
-            fileLink="/files/HistoriaPolski.pdf"
+            fileLink="/znpu-react/files/HistoriaPolski.pdf"
             title="ПРОГРАМA ІСТОРІЯ ПОЛЬЩІ ДЛЯ ЗАГАЛЬНООСВІТНІХ НАВЧАЛЬНИХ ЗАКЛАДІВ ФАКУЛЬТАТИВНИЙ КУРС/КУРС ЗА ВИБОРОМ 5-9, 10-11 класи"
           />
           <FileLink
             isFileDownload={false}
-            fileLink="/files/Jezyk_polski.pdf"
+            fileLink="/znpu-react/files/Jezyk_polski.pdf"
             title="ПРОГРАМА для загальноосвітніх навчальних закладів. Польська мова 5-11 класи. Факультативний курс /курс за вибором/ Автор: Л. М. Глинюк."
           />
           <FileLink
             isFileDownload={false}
-            fileLink="/files/Literatura_Polski.pdf"
+            fileLink="/znpu-react/files/Literatura_Polski.pdf"
             title="ПРОГРАМА для загальноосвітніх навчальних закладів. Польська література 7-11 класи. Факультативний курс /курс за вибором/ Автор: Мацькович Марія Романівна"
           />
           <FileLink
             isFileDownload={false}
-            fileLink="/files/Narodoznawstwo.pdf"
+            fileLink="/znpu-react/files/Narodoznawstwo.pdf"
             title="Програма ДЛЯ ЗАГАЛЬНООСВІТНІХ НАВЧАЛЬНИХ ЗАКЛАДІВ З ПОЛЬСЬКОГО НАРОДОЗНАВСТВА10 – 11 КЛАСИ ФАКУЛЬТАТИВНИЙ КУРС/Курс за виборомю. Укладачі програми: К.філос. н., доц. Білан Т. О., Міськевич К.І., Хлопек А.Б."
           />
         </StyledContent>
