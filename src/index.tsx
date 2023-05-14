@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import Home from "./views/Home";
 import GlobalStyle from "./styles/GlobalStyle";
 import StudiaPodyplomowe from "./views/StudiaPodyplomowe";
@@ -39,9 +39,9 @@ import Programs from "./views/Programs";
 import ScenariosOfCelebrations from "./views/ScenariosOfCelebrations";
 import EducationalInstitutions from "./views/EducationalInstitutions";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: "/",
+    path: "/znpu-react",
     element: <Home />,
   },
   {
