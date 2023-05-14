@@ -41,7 +41,7 @@ import EducationalInstitutions from "./views/EducationalInstitutions";
 
 const router = createHashRouter([
   {
-    path: "/znpu-react",
+    path: "/",
     element: <Home />,
   },
   {
