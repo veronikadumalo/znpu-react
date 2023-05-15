@@ -48,6 +48,7 @@ interface PdfSliderProps {
 }
 
 const PdfSlider = ({ pdfFile }: PdfSliderProps) => {
+  console.log(pdfFile);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
 
@@ -79,11 +80,13 @@ const PdfSlider = ({ pdfFile }: PdfSliderProps) => {
         file={pdfFile}
         onLoadSuccess={onDocumentLoadSuccess}
         className={"slider"}
+        onLoadError={(error) => console.log(error)}
       >
         <Page
           pageNumber={pageNumber}
           renderTextLayer={false}
           className={"slider"}
+          onLoadError={(error) => console.log(error)}
         />
       </Document>
       <SliderNavigation
