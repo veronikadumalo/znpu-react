@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components/macro";
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
 import SliderNavigation from "./SliderNavigation";
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 // import chevronLeft from "../assets/images/chevron-left.png";
 // import chevronRight from "../assets/images/chevron-right.png";
 // import chevronLeftGrey from "../assets/images/chevron-left-grey.png";
