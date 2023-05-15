@@ -26,7 +26,7 @@ const StyledNavigationLink = styled(Link)<StyledNavigationLinkProps>`
   text-transform: uppercase;
   font-size: 0.82rem;
   font-weight: 900;
-  text-decoration: none;
+  /* text-decoration: none; */
   padding: 25px 25px 25px 0;
   min-width: 100px;
   max-width: 15%;
@@ -67,42 +67,63 @@ const StyledSubpages = styled.div`
   width: 100%;
   top: 70px;
   min-height: 200px;
-  padding: 20px;
+  padding: 20px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  .subpage {
+    max-width: max-content;
+    min-width: auto;
+    margin: 0;
+    &:first-child {
+      padding-left: 0;
+    }
+  }
 `;
 
 const DesktopNavigation = () => {
   const [hoveredNavigationItem, setHoveredNavigationItem] =
-    useState<NavigationLink | null>(null);
+    useState<NavigationLink | null>(NAVIGATION[5]);
   const location = useLocation();
+  console.log(location.pathname);
   return (
     <StyledNavigationContainer
       onMouseLeave={() => setHoveredNavigationItem(null)}
       onBlur={() => setHoveredNavigationItem(null)}
     >
-      {NAVIGATION.map((item) => (
-        <StyledNavigationLink
-          to={item.link}
-          key={item.title}
-          onMouseOver={() => setHoveredNavigationItem(item)}
-          onFocus={() => setHoveredNavigationItem(item)}
-          isActive={location.pathname === item.link}
-        >
-          <span>{item.title}</span>
-          {item.subpages && (
-            <StyledChevronIcon
-              src={chevronIcon}
-              alt="Chevron Icon"
-              width={15}
-              height={15}
-              isHovered={hoveredNavigationItem === item}
-            />
-          )}
-        </StyledNavigationLink>
-      ))}
+      {NAVIGATION.map((item) => {
+        const isActive =
+          Boolean(
+            item.subpages?.find((item) => item.link === location.pathname)
+          ) || item.link === location.pathname;
+        return (
+          <StyledNavigationLink
+            to={item.link}
+            key={item.title}
+            onMouseOver={() => setHoveredNavigationItem(item)}
+            onFocus={() => setHoveredNavigationItem(item)}
+            isActive={isActive}
+          >
+            <span>{item.title}</span>
+            {item.subpages && (
+              <StyledChevronIcon
+                src={chevronIcon}
+                alt="Chevron Icon"
+                width={15}
+                height={15}
+                isHovered={hoveredNavigationItem === item}
+              />
+            )}
+          </StyledNavigationLink>
+        );
+      })}
       {hoveredNavigationItem?.subpages && (
         <StyledSubpages>
           {hoveredNavigationItem?.subpages?.map((subpage) => (
-            <StyledNavigationLink to={subpage.link} key={subpage.title}>
+            <StyledNavigationLink
+              to={subpage.link}
+              key={subpage.title}
+              className="subpage"
+            >
               {subpage.title}
             </StyledNavigationLink>
           ))}
