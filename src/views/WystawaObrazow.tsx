@@ -4,7 +4,6 @@ import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
 import PdfSlider from "../components/PdfSlider";
 import FileLink from "../components/FileLink";
-import pdf from "../assets/files/PrezentacjaIkon.pdf";
 
 const StyledContainer = styled.div`
   display: flex;
