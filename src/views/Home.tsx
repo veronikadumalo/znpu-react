@@ -175,7 +175,7 @@ const Home = () => {
             filologii polskiej. Na wszystkich etapach edukacyjnych dała się
             poznać jako ambitna, zdolna uczennica....
           </StyledDescription>
-          <StyledMoreLink to="/o-nas/natalia-tulasiewicz">
+          <StyledMoreLink to="/natalia-tulasiewicz">
             więcej {`  >`}
           </StyledMoreLink>
         </StyledGirlContainer>
@@ -186,7 +186,7 @@ const Home = () => {
               <NewPost post={post} key={i} />
             ))}
           </div>
-          <StyledMoreLink to="/o-nas/aktualnosci">
+          <StyledMoreLink to="/aktualnosci">
             wszystkie aktualności {`  >`}
           </StyledMoreLink>
         </StyledNewsContainer>
