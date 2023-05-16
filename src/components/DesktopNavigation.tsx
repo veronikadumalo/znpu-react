@@ -82,9 +82,8 @@ const StyledSubpages = styled.div`
 
 const DesktopNavigation = () => {
   const [hoveredNavigationItem, setHoveredNavigationItem] =
-    useState<NavigationLink | null>(NAVIGATION[5]);
+    useState<NavigationLink | null>(null);
   const location = useLocation();
-  console.log(location.pathname);
   return (
     <StyledNavigationContainer
       onMouseLeave={() => setHoveredNavigationItem(null)}
