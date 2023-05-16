@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Link, useLocation } from "react-router-dom";
 import { NAVIGATION } from "../data/navigation";
 import chevronIcon from "../assets/images/chevron-down.png";

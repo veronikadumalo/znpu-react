@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import downloadIcon from "../assets/images/download-icon.png";
 
 interface FileLinkProps {

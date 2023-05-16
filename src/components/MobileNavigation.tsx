@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import logo from "../assets/images/logo.png";
 import menuIcon from "../assets/images/menu-icon.png";
 import { useState } from "react";

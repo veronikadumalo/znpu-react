@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { SubpageLink } from "../types/general";
 import { Link, useLocation } from "react-router-dom";
 

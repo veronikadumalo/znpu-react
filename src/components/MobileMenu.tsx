@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Overlay } from "./Overlay";
 import { NAVIGATION } from "../data/navigation";
 import { Link } from "react-router-dom";

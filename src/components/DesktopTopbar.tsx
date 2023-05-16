@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import facebookIcon from "../assets/images/facebook-48.png";

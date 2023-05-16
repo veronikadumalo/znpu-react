@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { NAVIGATION } from "../data/navigation";
