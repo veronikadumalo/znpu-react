@@ -15,7 +15,8 @@ const StyledField = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 10px;
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   margin: 0 auto;
 `;
 const StyledInput = styled.input`
@@ -25,6 +26,7 @@ const StyledInput = styled.input`
   outline: none;
   font-size: 18px;
   padding: 5px;
+  width: 100%;
 `;
 const StyledLabel = styled.label`
   font-weight: bold;
