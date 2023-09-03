@@ -12,7 +12,7 @@ import NataliaTulasiewicz from "./views/NataliaTulasiewicz";
 import Aktualnosci from "./views/Aktualnosci";
 import Departments from "./views/Departments";
 import Statute from "./views/Statute";
-import Muzeum from "./views/Muzeum";
+import MuzeumAleksandraFresry from "./views/MuzeumAleksandraFresry";
 import WystawaObrazow from "./views/WystawaObrazow";
 import BrunoSchulz from "./views/BrunoSchulz";
 import Slownik from "./views/Slownik";
@@ -38,6 +38,9 @@ import HowToRegister from "./views/HowToRegister";
 import Programs from "./views/Programs";
 import ScenariosOfCelebrations from "./views/ScenariosOfCelebrations";
 import EducationalInstitutions from "./views/EducationalInstitutions";
+import AdaptacjaBudynku from "./views/AdaptacjaBudynku";
+import HistoriaZalozenia from "./views/HistoriaZalozenia";
+import PrawoUkrainskie from "./views/PrawoUkrainskie";
 
 const router = createHashRouter([
   {
@@ -69,8 +72,8 @@ const router = createHashRouter([
     element: <StudiaPodyplomowe />,
   },
   {
-    path: "/muzeum",
-    element: <Muzeum />,
+    path: "/muzeum-aleksandra-fredry",
+    element: <MuzeumAleksandraFresry />,
   },
   {
     path: "/wystawa-obrazow",
@@ -175,6 +178,18 @@ const router = createHashRouter([
   {
     path: "/dolacz-do-nas",
     element: <DolaczDoNas />,
+  },
+  {
+    path: "/adaptacja-budynku",
+    element: <AdaptacjaBudynku />,
+  },
+  {
+    path: "/historia-zalozenia",
+    element: <HistoriaZalozenia />,
+  },
+  {
+    path: "/prawo-ukrainskie",
+    element: <PrawoUkrainskie />,
   },
 ]);
 

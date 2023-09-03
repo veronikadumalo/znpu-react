@@ -7,7 +7,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/l
 
 const StyledContainer = styled.div`
   width: 100%;
-  height: 700px;
+  max-height: 700px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 15px;
@@ -16,7 +16,10 @@ const StyledContainer = styled.div`
     height: auto;
   }
   .slider {
-    height: 600px;
+    max-height: 600px;
+    & canvas {
+      max-height: 600px;
+    }
     @media (max-width: 1250px) {
       height: auto;
     }

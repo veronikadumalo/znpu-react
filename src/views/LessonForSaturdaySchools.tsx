@@ -5,7 +5,7 @@ import { NAVIGATION } from "../data/navigation";
 const LessonForSaturdaySchools = () => {
   return (
     <Layout>
-      <SubMenu submenuItems={NAVIGATION[5].subpages} />
+      <SubMenu submenuItems={NAVIGATION[6].subpages} />
     </Layout>
   );
 };

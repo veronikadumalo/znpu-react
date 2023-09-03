@@ -23,7 +23,7 @@ html{
 }
 
 html,
-body {
+body, button {
   font-family: "Merriweather", serif;
   margin: 0;
   padding: 0;

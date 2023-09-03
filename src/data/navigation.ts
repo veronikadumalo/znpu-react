@@ -13,6 +13,9 @@ export const NAVIGATION: NavigationLink[] = [
       },
       { title: "natalia tulasiewicz", link: "/natalia-tulasiewicz" },
       { title: "aktualności", link: "/aktualnosci" },
+      { title: "adaptacja budynku", link: "/adaptacja-budynku" },
+      { title: "historia założenia", link: "/historia-zalozenia" },
+      { title: "prawo ukraińskie", link: "/prawo-ukrainskie" },
     ],
   },
   {
@@ -21,9 +24,9 @@ export const NAVIGATION: NavigationLink[] = [
   },
   {
     title: "dziedzictwo kulturowe",
-    link: "/muzeum",
+    link: "/muzeum-aleksandra-fredry",
     subpages: [
-      { title: "muzeum", link: "/muzeum" },
+      { title: "Muzeum Aleksandra Fredry", link: "/muzeum-aleksandra-fredry" },
       { title: "wystawa obrazów", link: "/wystawa-obrazow" },
       {
         title: "muzeum 'izba pamięci Bruno Schulza'",
@@ -92,10 +95,6 @@ export const NAVIGATION: NavigationLink[] = [
         link: "/podreczniki",
       },
       {
-        title: "Konspekty lekcji dla szkół sobotnich",
-        link: "/konspekty-lekcji-dla-szkol-sobotnich",
-      },
-      {
         title: "Prezentacje",
         link: "/prezentacje",
       },
@@ -124,6 +123,10 @@ export const NAVIGATION: NavigationLink[] = [
       {
         title: "Як зареєструвати",
         link: "/jak-zarejestruwatysja",
+      },
+      {
+        title: "Konspekty lekcji dla szkół sobotnich",
+        link: "/konspekty-lekcji-dla-szkol-sobotnich",
       },
       {
         title: "Програми",
