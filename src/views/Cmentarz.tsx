@@ -25,8 +25,8 @@ const Cmentarz = () => {
       <StyledContainer>
         <SubMenu submenuItems={NAVIGATION[2].subpages} />
         <StyledContent>
-          <PdfSlider pdfFile={"/znpu-react/cmentarze.pdf"} />
-          <FileLink fileLink="/znpu-react/cmentarze.pdf" title="Cmentarze" />
+          <PdfSlider pdfFile={"/cmentarze.pdf"} />
+          <FileLink fileLink="/cmentarze.pdf" title="Cmentarze" />
         </StyledContent>
       </StyledContainer>
     </Layout>

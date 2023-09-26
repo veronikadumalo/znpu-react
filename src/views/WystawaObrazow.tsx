@@ -25,11 +25,8 @@ const WystawaObrazow = () => {
       <StyledContainer>
         <SubMenu submenuItems={NAVIGATION[2].subpages} />
         <StyledContent>
-          <PdfSlider pdfFile={"/znpu-react/PrezentacjaIkon.pdf"} />
-          <FileLink
-            fileLink="/znpu-react/PrezentacjaIkon.pdf"
-            title="Prezentacja Ikon"
-          />
+          <PdfSlider pdfFile={"/PrezentacjaIkon.pdf"} />
+          <FileLink fileLink="/PrezentacjaIkon.pdf" title="Prezentacja Ikon" />
         </StyledContent>
       </StyledContainer>
     </Layout>
