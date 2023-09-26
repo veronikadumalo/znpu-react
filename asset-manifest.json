@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.5aa126d9.js",
-    "static/js/787.c80d233f.chunk.js": "/static/js/787.c80d233f.chunk.js",
-    "pdf.worker.js": "/d6f04dfc255b2696bc7e50baf8d0e54a.js",
-    "static/media/natalia-tulasiewicz.png": "/static/media/natalia-tulasiewicz.37475339dcf8eac3a955.png",
-    "static/media/logo.png": "/static/media/logo.7a06eb76a65b74aed38a.png",
-    "index.html": "/index.html",
-    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.5aa126d9.js.map": "/static/js/main.5aa126d9.js.map",
-    "787.c80d233f.chunk.js.map": "/static/js/787.c80d233f.chunk.js.map"
+    "main.css": "/znpu-react/static/css/main.e6c13ad2.css",
+    "main.js": "/znpu-react/static/js/main.99ea99a9.js",
+    "static/js/787.c80d233f.chunk.js": "/znpu-react/static/js/787.c80d233f.chunk.js",
+    "pdf.worker.js": "/znpu-react/d6f04dfc255b2696bc7e50baf8d0e54a.js",
+    "static/media/natalia-tulasiewicz.png": "/znpu-react/static/media/natalia-tulasiewicz.37475339dcf8eac3a955.png",
+    "static/media/logo.png": "/znpu-react/static/media/logo.7a06eb76a65b74aed38a.png",
+    "index.html": "/znpu-react/index.html",
+    "main.e6c13ad2.css.map": "/znpu-react/static/css/main.e6c13ad2.css.map",
+    "main.99ea99a9.js.map": "/znpu-react/static/js/main.99ea99a9.js.map",
+    "787.c80d233f.chunk.js.map": "/znpu-react/static/js/787.c80d233f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.5aa126d9.js"
+    "static/js/main.99ea99a9.js"
   ]
 }
