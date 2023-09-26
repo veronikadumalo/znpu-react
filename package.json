@@ -1,7 +1,7 @@
 {
   "name": "znpu-react",
   "version": "0.1.0",
-  "homepage": "https://veronikadumalo.github.io/znpu-react",
+  "homepage": "https://veronikadumalo.github.io",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
