@@ -6,6 +6,8 @@ import styled from "styled-components";
 import MobileNavigation from "./MobileNavigation";
 import MobileFooter from "./MobileFooter";
 import PageWrapper from "./PageWrapper";
+import { useGlobalState } from "../context/state";
+import LoadingAnimation from "./LoadingAnimation";
 
 interface LayoutProps {
   children: ReactNode;
@@ -28,18 +30,22 @@ const StyledChildrenContainer = styled.div`
   }
 `;
 
-const Layout = ({ children }: LayoutProps) => (
-  <>
-    <PageWrapper>
-      <StyledContent>
-        <DesktopTopbar />
-        <DesktopNavigation />
-        <MobileNavigation />
-        <StyledChildrenContainer>{children}</StyledChildrenContainer>
-      </StyledContent>
-      <Footer />
-      <MobileFooter />
-    </PageWrapper>
-  </>
-);
+const Layout = ({ children }: LayoutProps) => {
+  const [isLoading] = useGlobalState("isLoading");
+  return (
+    <>
+      <PageWrapper>
+        <StyledContent>
+          <DesktopTopbar />
+          <DesktopNavigation />
+          <MobileNavigation />
+          <StyledChildrenContainer>{children}</StyledChildrenContainer>
+        </StyledContent>
+        <Footer />
+        <MobileFooter />
+        {isLoading ? <LoadingAnimation /> : <></>}
+      </PageWrapper>
+    </>
+  );
+};
 export default Layout;

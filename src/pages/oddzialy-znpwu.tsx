@@ -2,8 +2,12 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
-import { DEPARTMENTS } from "../data/oddzialy";
 import Link from "next/link";
+import { useLazyQuery } from "@apollo/client";
+import { DEPARTAMENTS_QUERY } from "../graphql/query/departaments";
+import { useEffect, useState } from "react";
+import { Person } from "@prisma/client";
+import { setGlobalState } from "../context/state";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -66,7 +70,28 @@ const StyledDepartmentPerson = styled.div`
 `;
 const StyledPersonName = styled.p``;
 
+interface Department {
+  id: string;
+  title: string;
+  persons: Person[];
+}
+
 export default function Departments() {
+  const [departmentsData, setDepartmentsData] = useState<Department[] | []>([]);
+  const [departments, { loading, error }] = useLazyQuery(DEPARTAMENTS_QUERY, {
+    onCompleted: (data) => {
+      if (!data) return;
+      setDepartmentsData(data.deparments);
+    },
+  });
+
+  useEffect(() => {
+    departments();
+  }, []);
+
+  useEffect(() => {
+    setGlobalState("isLoading", loading);
+  }, [loading]);
   return (
     <Layout>
       <StyledContainer>
@@ -74,7 +99,7 @@ export default function Departments() {
         <StyledContent>
           <StyledTitle>Oddziały ZNPwU</StyledTitle>
           <StyledList>
-            {DEPARTMENTS.map((department) => (
+            {departmentsData?.map((department) => (
               <StyledDepartmentContainer key={department.title}>
                 <StyledDeparmentTitle>{department.title}</StyledDeparmentTitle>
                 {department.persons.map((person) => (
