@@ -1,6 +1,7 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { SubpageLink } from "../types/general";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/dist/client/router";
 
 interface SubMenuProps {
   submenuItems?: SubpageLink[];
@@ -43,14 +44,14 @@ const StyledItemLink = styled(Link)<StyledItemLinkProps>`
 `;
 
 export const SubMenu = ({ submenuItems }: SubMenuProps) => {
-  const location = useLocation();
+  const router = useRouter();
   return (
     <StyledContainer>
       {submenuItems?.map((item) => (
         <StyledItemLink
           key={item.title}
-          to={item.link}
-          isActive={location.pathname === item.link}
+          href={item.link}
+          isActive={router.pathname === item.link}
         >
           {item.title}
         </StyledItemLink>

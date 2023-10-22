@@ -1,9 +1,11 @@
-import styled from "styled-components/macro";
-import { Link, useLocation } from "react-router-dom";
+import styled from "styled-components";
 import { NAVIGATION } from "../data/navigation";
 import chevronIcon from "../assets/images/chevron-down.png";
 import { useState } from "react";
 import { NavigationLink } from "../types/general";
+import Link from "next/link";
+import { useRouter } from "next/dist/client/router";
+import Image from "next/image";
 
 const StyledNavigationContainer = styled.div`
   background: var(--secondary);
@@ -30,6 +32,8 @@ const StyledNavigationLink = styled(Link)<StyledNavigationLinkProps>`
   padding: 25px 25px 25px 0;
   min-width: 100px;
   max-width: 15%;
+  display: flex;
+  align-items: center;
   /* text-transform: uppercase; */
   &:first-child {
     padding-left: 25px;
@@ -55,7 +59,7 @@ const StyledNavigationLink = styled(Link)<StyledNavigationLinkProps>`
 interface StyledChevronIconProps {
   isHovered: boolean;
 }
-const StyledChevronIcon = styled.img<StyledChevronIconProps>`
+const StyledChevronIcon = styled(Image)<StyledChevronIconProps>`
   margin-left: 5px;
   transition: transform 0.3s;
   transform: ${({ isHovered }) =>
@@ -83,7 +87,8 @@ const StyledSubpages = styled.div`
 const DesktopNavigation = () => {
   const [hoveredNavigationItem, setHoveredNavigationItem] =
     useState<NavigationLink | null>(null);
-  const location = useLocation();
+  const router = useRouter();
+
   return (
     <StyledNavigationContainer
       onMouseLeave={() => setHoveredNavigationItem(null)}
@@ -92,11 +97,11 @@ const DesktopNavigation = () => {
       {NAVIGATION.map((item) => {
         const isActive =
           Boolean(
-            item.subpages?.find((item) => item.link === location.pathname)
-          ) || item.link === location.pathname;
+            item.subpages?.find((item) => item.link === router.pathname)
+          ) || item.link === router.pathname;
         return (
           <StyledNavigationLink
-            to={item.link}
+            href={item.link}
             key={item.title}
             onMouseOver={() => setHoveredNavigationItem(item)}
             onFocus={() => setHoveredNavigationItem(item)}
@@ -119,7 +124,7 @@ const DesktopNavigation = () => {
         <StyledSubpages>
           {hoveredNavigationItem?.subpages?.map((subpage) => (
             <StyledNavigationLink
-              to={subpage.link}
+              href={subpage.link}
               key={subpage.title}
               className="subpage"
             >

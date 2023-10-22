@@ -1,5 +1,6 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { Post } from "../types/general";
+import Image from "next/image";
 
 interface NewPostProps {
   post: Post;
@@ -13,7 +14,7 @@ const StyledContainer = styled.div`
     border: none;
   }
 `;
-const StyledImage = styled.img`
+const StyledImage = styled(Image)`
   width: 100px;
   height: 100px;
 `;

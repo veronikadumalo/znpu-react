@@ -1,5 +1,5 @@
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 
 const StyledOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.7);

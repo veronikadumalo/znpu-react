@@ -1,8 +1,8 @@
-import styled from "styled-components/macro";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 import logo from "../assets/images/logo.png";
 import facebookIcon from "../assets/images/facebook-48.png";
-
+import Link from "next/link";
+import Image from "next/image";
 const StyledTopbarContainer = styled.div`
   width: 100%;
   text-align: right;
@@ -43,7 +43,7 @@ const StyledHeading = styled.h1`
     font-size: 1.7rem;
   }
 `;
-const StyledLogo = styled.img`
+const StyledLogo = styled(Image)`
   width: 80px;
   height: auto;
   @media (max-width: 1200px) {
@@ -59,10 +59,10 @@ const DesktopTopbar = () => (
     <StyledAddress>
       82100 Drohobycz ul. Truskawiecka 9 obwód lwowski
       <StyledFacebookLink href="https://www.facebook.com/CentrumDrohobycz">
-        <img src={facebookIcon} alt="Facebook Icon" height={30} width={30} />
+        <Image src={facebookIcon} alt="Facebook Icon" height={30} width={30} />
       </StyledFacebookLink>
     </StyledAddress>
-    <StyledTitle to="/">
+    <StyledTitle href="/">
       <StyledHeading>Cпілка вчителів - полоністів України</StyledHeading>
       <StyledLogo src={logo} alt="Cпілка вчителів - полоністів України" />
       <StyledHeading>

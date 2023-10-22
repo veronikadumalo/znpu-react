@@ -1,6 +1,7 @@
 import { useState } from "react";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import SliderNavigation from "./SliderNavigation";
+import Image from "next/image";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -14,7 +15,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledImage = styled.img``;
+const StyledImage = styled(Image)``;
 
 interface ImageSliderProps {
   images: string[];

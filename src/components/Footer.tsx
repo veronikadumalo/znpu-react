@@ -1,8 +1,9 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import logo from "../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { NAVIGATION } from "../data/navigation";
 import facebookIcon from "../assets/images/facebook-60.png";
+import Image from "next/image";
 
 const StyledFooterContainer = styled.div`
   margin-top: auto;
@@ -31,7 +32,7 @@ const StyledFooterTitle = styled(Link)`
   text-decoration: none;
   color: var(--white);
 `;
-const StyledLogo = styled.img`
+const StyledLogo = styled(Image)`
   height: 80px;
   width: auto;
   margin-right: 15px;
@@ -105,7 +106,7 @@ const StyledBottomText = styled.p`
 const Footer = () => (
   <StyledFooterContainer>
     <StyledFooterContent>
-      <StyledFooterTitle to="/">
+      <StyledFooterTitle href="/">
         <StyledLogo
           src={logo}
           alt="Zjednoczenie nauczycieli polskich w Ukrainie"
@@ -125,27 +126,27 @@ const Footer = () => (
             82100 Дрогобич <br />
             вул. Данила Галицького, 21 а/с № 17
           </StyledAddress>
-          <StyledLink to="tel:0324450177">03244 50177</StyledLink>
-          <StyledLink to="mailto:adam-ch@mail.lviv.ua">
+          <StyledLink href="tel:0324450177">03244 50177</StyledLink>
+          <StyledLink href="mailto:adam-ch@mail.lviv.ua">
             adam-ch@mail.lviv.ua
           </StyledLink>
-          <StyledLink to="mailto:znpu.ua@gmail.com">
+          <StyledLink href="mailto:znpu.ua@gmail.com">
             znpu.ua@gmail.com
           </StyledLink>
         </StyledContactContainer>
         <StyledFooterPageMap>
           {NAVIGATION.map((item) => (
-            <StyledPageMapLink to={item.link} key={item.title}>
+            <StyledPageMapLink href={item.link} key={item.title}>
               {item.title}
             </StyledPageMapLink>
           ))}
         </StyledFooterPageMap>
       </StyledFooterMainContainer>
       <StyledLink
-        to="https://www.facebook.com/CentrumDrohobycz"
+        href="https://www.facebook.com/CentrumDrohobycz"
         className="facebookLink"
       >
-        <img src={facebookIcon} alt="Facebook Icon" height={40} width={40} />
+        <Image src={facebookIcon} alt="Facebook Icon" height={40} width={40} />
       </StyledLink>
       <StyledBottomText>
         2023 © Zjednoczenie nauczycieli polskich w Ukraine

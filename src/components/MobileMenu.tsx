@@ -1,12 +1,14 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import { Overlay } from "./Overlay";
 import { NAVIGATION } from "../data/navigation";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import Link from "next/link";
 import chevronIcon from "../assets/images/chevron-down.png";
 import closeIcon from "../assets/images/close-icon.png";
 import { useEffect, useState } from "react";
 import { NavigationLink } from "../types/general";
 import React from "react";
+import { useRouter } from "next/dist/client/router";
+import Image from "next/image";
 
 interface StyledContainerProps {
   isOpened?: boolean;
@@ -48,13 +50,13 @@ interface StyledChevronIconProps {
   isOpened?: boolean;
 }
 
-const StyledChevronIcon = styled.img<StyledChevronIconProps>`
+const StyledChevronIcon = styled(Image)<StyledChevronIconProps>`
   margin-left: 5px;
   transition: transform 0.3s;
   transform: ${({ isOpened }) =>
     isOpened ? "rotate(180deg)" : "rotate(0deg)"};
 `;
-const StyledCloseIcon = styled.img`
+const StyledCloseIcon = styled(Image)`
   position: fixed;
   top: 15px;
   right: 15px;
@@ -92,8 +94,7 @@ const MobileMenu = ({ handleCloseClick, isOpened }: MobileMenuProps) => {
   const [activeMenuItem, setActiveMenuItem] = useState<NavigationLink | null>(
     null
   );
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
   const handleMenuItmeClick = (item: NavigationLink) => {
     if (item.subpages) {
       if (openedMenuItem && openedMenuItem === item) {
@@ -102,7 +103,7 @@ const MobileMenu = ({ handleCloseClick, isOpened }: MobileMenuProps) => {
         setOpenedMenuItem(item);
       }
     } else {
-      navigate(item.link);
+      router.push(item.link);
     }
   };
 
@@ -116,7 +117,7 @@ const MobileMenu = ({ handleCloseClick, isOpened }: MobileMenuProps) => {
       setOpenedMenuItem(selectedNavigationItem);
       setActiveMenuItem(selectedNavigationItem);
     }
-  }, [location]);
+  }, [router]);
 
   return (
     <>
@@ -153,8 +154,8 @@ const MobileMenu = ({ handleCloseClick, isOpened }: MobileMenuProps) => {
                 {item.subpages?.map((item) => (
                   <StyledSubmenuItem
                     key={item.link}
-                    to={item.link}
-                    isActive={item.link === location.pathname}
+                    href={item.link}
+                    isActive={item.link === router.pathname}
                   >
                     {item.title}
                   </StyledSubmenuItem>

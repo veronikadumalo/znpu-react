@@ -1,9 +1,10 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import logo from "../assets/images/logo.png";
 import menuIcon from "../assets/images/menu-icon.png";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
 import facebookIcon from "../assets/images/facebook-48.png";
+import Image from "next/image";
 
 const StyledContainer = styled.div`
   padding: 15px 15px 5px 10px;
@@ -31,7 +32,7 @@ const StyledTitle = styled.div`
   margin-left: 10px;
 `;
 
-const StyledLogo = styled.img`
+const StyledLogo = styled(Image)`
   height: 80px;
   width: auto;
 `;
@@ -109,13 +110,13 @@ const MobileNavigation = () => {
             onClick={() => setIsMenuOpened(true)}
             isMenuOpened={isMenuOpened}
           >
-            <img src={menuIcon} alt="Menu Icon" width={40} />
+            <Image src={menuIcon} alt="Menu Icon" width={40} height={40} />
           </StyledButton>
         </StyledHeadingContainer>
         <StyledAddress>
           82100 Drohobycz ul. Truskawiecka 9 obwód lwowski
           <StyledFacebookLink href="https://www.facebook.com/CentrumDrohobycz">
-            <img
+            <Image
               src={facebookIcon}
               alt="Facebook Icon"
               height={25}

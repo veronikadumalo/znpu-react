@@ -2,9 +2,10 @@ import { ReactNode } from "react";
 import DesktopNavigation from "./DesktopNavigation";
 import Footer from "./Footer";
 import DesktopTopbar from "./DesktopTopbar";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import MobileNavigation from "./MobileNavigation";
 import MobileFooter from "./MobileFooter";
+import PageWrapper from "./PageWrapper";
 
 interface LayoutProps {
   children: ReactNode;
@@ -29,14 +30,16 @@ const StyledChildrenContainer = styled.div`
 
 const Layout = ({ children }: LayoutProps) => (
   <>
-    <StyledContent>
-      <DesktopTopbar />
-      <DesktopNavigation />
-      <MobileNavigation />
-      <StyledChildrenContainer>{children}</StyledChildrenContainer>
-    </StyledContent>
-    <Footer />
-    <MobileFooter />
+    <PageWrapper>
+      <StyledContent>
+        <DesktopTopbar />
+        <DesktopNavigation />
+        <MobileNavigation />
+        <StyledChildrenContainer>{children}</StyledChildrenContainer>
+      </StyledContent>
+      <Footer />
+      <MobileFooter />
+    </PageWrapper>
   </>
 );
 export default Layout;

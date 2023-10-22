@@ -1,5 +1,6 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import downloadIcon from "../assets/images/download-icon.png";
+import Image from "next/image";
 
 interface FileLinkProps {
   fileLink: string;
@@ -33,7 +34,7 @@ const StyledTitle = styled.p`
     font-size: 12px;
   }
 `;
-const StyledDownloadIcon = styled.img`
+const StyledDownloadIcon = styled(Image)`
   width: 30px;
   height: 30px;
   margin-left: 20px;

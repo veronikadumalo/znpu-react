@@ -1,8 +1,9 @@
-import styled from "styled-components/macro";
+import styled from "styled-components";
 import chevronLeftGrey from "../assets/images/chevron-left-grey.png";
 import chevronRightGrey from "../assets/images/chevron-right-grey.png";
 import chevronLeft from "../assets/images/chevron-left.png";
 import chevronRight from "../assets/images/chevron-right.png";
+import Image from "next/image";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ const SliderNavigation = ({
   return (
     <StyledContainer>
       <StyledButton onClick={handlePrevClick} disabled={activeIndex === 1}>
-        <img
+        <Image
           src={activeIndex === 1 ? chevronLeftGrey : chevronLeft}
           alt="Chevron Left"
           width={20}
@@ -58,7 +59,7 @@ const SliderNavigation = ({
         onClick={handleNextClick}
         disabled={activeIndex === pageLength}
       >
-        <img
+        <Image
           src={activeIndex === pageLength ? chevronRightGrey : chevronRight}
           alt="Chevron Right"
           width={20}
