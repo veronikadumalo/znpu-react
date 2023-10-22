@@ -1,23 +1,24 @@
-import { createYoga } from "graphql-yoga";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { schema } from "../../../graphql/schema";
+import { createYoga, createSchema } from "graphql-yoga";
 
-const { handleRequest } = createYoga<{
-  req: NextApiRequest;
-  res: NextApiResponse;
-}>({
-  schema,
+const { handleRequest } = createYoga({
   graphqlEndpoint: "/api/graphql",
+  schema: createSchema({
+    typeDefs: /* GraphQL */ `
+      type Query {
+        greetings: String
+      }
+    `,
+    resolvers: {
+      Query: {
+        greetings: () =>
+          "This is the `greetings` field of the root `Query` type",
+      },
+    },
+  }),
   fetchAPI: {
     Response: Response,
     Request: Request,
   },
 });
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 
 export { handleRequest as GET, handleRequest as POST };
