@@ -1,24 +1,20 @@
-import { createYoga, createSchema } from "graphql-yoga";
+import { createYoga } from "graphql-yoga";
+import { schema } from "../../../graphql/schema";
 
-const { handleRequest } = createYoga({
-  graphqlEndpoint: "/api/graphql",
-  schema: createSchema({
-    typeDefs: /* GraphQL */ `
-      type Query {
-        greetings: String
-      }
-    `,
-    resolvers: {
-      Query: {
-        greetings: () =>
-          "This is the `greetings` field of the root `Query` type",
-      },
-    },
-  }),
-  fetchAPI: {
-    Response: Response,
-    Request: Request,
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export const config = {
+  api: {
+    // Disable body parsing (required for file uploads)
+    bodyParser: false,
   },
-});
+};
 
-export { handleRequest as GET, handleRequest as POST };
+export default createYoga<{
+  req: NextApiRequest;
+  res: NextApiResponse;
+}>({
+  schema,
+  // Needed to be defined explicitly because our endpoint lives at a different path other than `/graphql`
+  graphqlEndpoint: "/api/graphql",
+});
