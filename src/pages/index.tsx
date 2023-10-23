@@ -150,9 +150,7 @@ export default function Page() {
               nauczycielami z Polski, Ukrainy i innych państw.
             </StyledDescription>
           </StyledSectionContent>
-          <StyledMoreLink href="/o-nas">
-            <a>więcej {`  >`}</a>
-          </StyledMoreLink>
+          <StyledMoreLink href="/o-nas">więcej {`  >`}</StyledMoreLink>
         </StyledAboutUsContainer>
         <StyledGirlContainer>
           <StyledGirlTitle>
@@ -179,7 +177,7 @@ export default function Page() {
             poznać jako ambitna, zdolna uczennica....
           </StyledDescription>
           <StyledMoreLink href="/natalia-tulasiewicz">
-            <a>więcej {`  >`}</a>
+            więcej {`  >`}
           </StyledMoreLink>
         </StyledGirlContainer>
         <StyledNewsContainer>
@@ -190,7 +188,7 @@ export default function Page() {
             ))}
           </div>
           <StyledMoreLink href="/aktualnosci">
-            <a>wszystkie aktualności {`  >`}</a>
+            wszystkie aktualności {`  >`}
           </StyledMoreLink>
         </StyledNewsContainer>
       </StyledContent>

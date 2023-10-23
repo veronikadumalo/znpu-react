@@ -58,10 +58,8 @@ const FileLink = ({
       style={{ pointerEvents: isDisabled ? "none" : "auto" }}
       isDisabled={isDisabled}
     >
-      <a>
-        <StyledTitle>{title}</StyledTitle>
-        <StyledDownloadIcon src={downloadIcon} alt="Download Icon" />
-      </a>
+      <StyledTitle>{title}</StyledTitle>
+      <StyledDownloadIcon src={downloadIcon} alt="Download Icon" />
     </StyledLink>
   );
 };

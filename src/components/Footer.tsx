@@ -107,16 +107,14 @@ const Footer = () => (
   <StyledFooterContainer>
     <StyledFooterContent>
       <StyledFooterTitle href="/">
-        <a>
-          <StyledLogo
-            src={logo}
-            alt="Zjednoczenie nauczycieli polskich w Ukrainie"
-          />
-          <StyledTitle>
-            Zjednoczenie nauczycieli <br />
-            polskich w Ukrainie
-          </StyledTitle>
-        </a>
+        <StyledLogo
+          src={logo}
+          alt="Zjednoczenie nauczycieli polskich w Ukrainie"
+        />
+        <StyledTitle>
+          Zjednoczenie nauczycieli <br />
+          polskich w Ukrainie
+        </StyledTitle>
       </StyledFooterTitle>
       <StyledFooterMainContainer>
         <StyledContactContainer>
@@ -139,7 +137,7 @@ const Footer = () => (
         <StyledFooterPageMap>
           {NAVIGATION.map((item) => (
             <StyledPageMapLink href={item.link} key={item.title}>
-              <a>{item.title}</a>
+              {item.title}
             </StyledPageMapLink>
           ))}
         </StyledFooterPageMap>
@@ -148,14 +146,7 @@ const Footer = () => (
         href="https://www.facebook.com/CentrumDrohobycz"
         className="facebookLink"
       >
-        <a>
-          <Image
-            src={facebookIcon}
-            alt="Facebook Icon"
-            height={40}
-            width={40}
-          />
-        </a>
+        <Image src={facebookIcon} alt="Facebook Icon" height={40} width={40} />
       </StyledLink>
       <StyledBottomText>
         2023 © Zjednoczenie nauczycieli polskich w Ukraine
