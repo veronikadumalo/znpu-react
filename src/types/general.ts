@@ -1,3 +1,5 @@
+import { Person } from ".prisma/client";
+
 export interface NavigationLink {
   title: string;
   link: string;
@@ -16,8 +18,9 @@ export interface Post {
 }
 
 export interface Department {
+  id: string;
   title: string;
-  persons: DepartmentPerson[];
+  persons: Person[];
 }
 export interface DepartmentPerson {
   name: string;

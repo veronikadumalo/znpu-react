@@ -5,9 +5,9 @@ import { NAVIGATION } from "../data/navigation";
 import Link from "next/link";
 import { useLazyQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { Person } from "@prisma/client";
 import { setGlobalState } from "../context/state";
 import { DEPARTAMENTS_QUERY } from "../graphql/query/departaments";
+import { Department } from "../types/general";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -69,12 +69,6 @@ const StyledDepartmentPerson = styled.div`
   }
 `;
 const StyledPersonName = styled.p``;
-
-interface Department {
-  id: string;
-  title: string;
-  persons: Person[];
-}
 
 export default function Departments() {
   const [departmentsData, setDepartmentsData] = useState<Department[] | []>([]);
