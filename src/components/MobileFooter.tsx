@@ -79,14 +79,16 @@ const MobileFooter = () => {
   return (
     <StyledFooterContainer>
       <StyledFooterTitle href="/">
-        <StyledLogo
-          src={logo}
-          alt="Zjednoczenie nauczycieli polskich w Ukrainie"
-        />
-        <StyledTitle>
-          Zjednoczenie nauczycieli <br />
-          polskich w Ukrainie
-        </StyledTitle>
+        <a>
+          <StyledLogo
+            src={logo}
+            alt="Zjednoczenie nauczycieli polskich w Ukrainie"
+          />
+          <StyledTitle>
+            Zjednoczenie nauczycieli <br />
+            polskich w Ukrainie
+          </StyledTitle>
+        </a>
       </StyledFooterTitle>
       <StyledContent>
         <StyledDetailsContainer>

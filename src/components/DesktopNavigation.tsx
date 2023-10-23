@@ -107,16 +107,18 @@ const DesktopNavigation = () => {
             onFocus={() => setHoveredNavigationItem(item)}
             isActive={isActive}
           >
-            <span>{item.title}</span>
-            {item.subpages && (
-              <StyledChevronIcon
-                src={chevronIcon}
-                alt="Chevron Icon"
-                width={15}
-                height={15}
-                isHovered={hoveredNavigationItem === item}
-              />
-            )}
+            <a>
+              <span>{item.title}</span>
+              {item.subpages && (
+                <StyledChevronIcon
+                  src={chevronIcon}
+                  alt="Chevron Icon"
+                  width={15}
+                  height={15}
+                  isHovered={hoveredNavigationItem === item}
+                />
+              )}
+            </a>
           </StyledNavigationLink>
         );
       })}

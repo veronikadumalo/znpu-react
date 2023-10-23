@@ -63,11 +63,13 @@ const DesktopTopbar = () => (
       </StyledFacebookLink>
     </StyledAddress>
     <StyledTitle href="/">
-      <StyledHeading>Cпілка вчителів - полоністів України</StyledHeading>
-      <StyledLogo src={logo} alt="Cпілка вчителів - полоністів України" />
-      <StyledHeading>
-        Zjednoczenie nauczycieli polskich w Ukrainie
-      </StyledHeading>
+      <a>
+        <StyledHeading>Cпілка вчителів - полоністів України</StyledHeading>
+        <StyledLogo src={logo} alt="Cпілка вчителів - полоністів України" />
+        <StyledHeading>
+          Zjednoczenie nauczycieli polskich w Ukrainie
+        </StyledHeading>
+      </a>
     </StyledTitle>
   </StyledTopbarContainer>
 );

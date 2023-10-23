@@ -94,17 +94,22 @@ const MobileNavigation = () => {
       <StyledContainer>
         <StyledHeadingContainer>
           <StyledHeadingLink href="/">
-            <StyledLogo src={logo} alt="Cпілка вчителів - полоністів України" />
-            <StyledTitle>
-              <StyledSpan>
-                Zjednoczenie nauczycieli <br />
-                polskich w Ukrainie
-              </StyledSpan>
-              <StyledSpan>
-                Cпілка вчителів - <br />
-                полоністів України
-              </StyledSpan>
-            </StyledTitle>
+            <a>
+              <StyledLogo
+                src={logo}
+                alt="Cпілка вчителів - полоністів України"
+              />
+              <StyledTitle>
+                <StyledSpan>
+                  Zjednoczenie nauczycieli <br />
+                  polskich w Ukrainie
+                </StyledSpan>
+                <StyledSpan>
+                  Cпілка вчителів - <br />
+                  полоністів України
+                </StyledSpan>
+              </StyledTitle>
+            </a>
           </StyledHeadingLink>
           <StyledButton
             onClick={() => setIsMenuOpened(true)}
