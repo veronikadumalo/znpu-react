@@ -4,7 +4,7 @@ import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
 import Link from "next/link";
 import { useLazyQuery } from "@apollo/client";
-import { DEPARTAMENTS_QUERY } from "../graphql/query/departaments";
+// import { DEPARTAMENTS_QUERY } from "../graphql/query/departaments";
 import { useEffect, useState } from "react";
 import { Person } from "@prisma/client";
 import { setGlobalState } from "../context/state";
@@ -78,20 +78,20 @@ interface Department {
 
 export default function Departments() {
   const [departmentsData, setDepartmentsData] = useState<Department[] | []>([]);
-  const [departments, { loading, error }] = useLazyQuery(DEPARTAMENTS_QUERY, {
-    onCompleted: (data) => {
-      if (!data) return;
-      setDepartmentsData(data.deparments);
-    },
-  });
+  // const [departments, { loading, error }] = useLazyQuery(DEPARTAMENTS_QUERY, {
+  //   onCompleted: (data) => {
+  //     if (!data) return;
+  //     setDepartmentsData(data.deparments);
+  //   },
+  // });
 
-  useEffect(() => {
-    departments();
-  }, []);
+  // useEffect(() => {
+  //   departments();
+  // }, []);
 
-  useEffect(() => {
-    setGlobalState("isLoading", loading);
-  }, [loading]);
+  // useEffect(() => {
+  //   setGlobalState("isLoading", loading);
+  // }, [loading]);
   return (
     <Layout>
       <StyledContainer>
