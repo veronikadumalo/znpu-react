@@ -36,7 +36,7 @@
     "start": "next start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "vercel-build": "npx prisma generate --data-proxy && next build"
+    "vercel-build": "npx prisma generate --data-proxy && npx prisma migrate deploy && next build"
   },
   "eslintConfig": {
     "extends": [
