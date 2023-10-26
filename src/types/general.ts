@@ -12,9 +12,12 @@ export interface SubpageLink {
 
 export interface Post {
   title: string;
+  subtitle: string;
+  imageUrl: string;
+  updatedAt: string;
+  createdAt: string;
   description: string;
-  image: string;
-  date: string;
+  id: string;
 }
 
 export interface Department {
@@ -29,4 +32,16 @@ export interface DepartmentPerson {
 export interface LinkData {
   title: string;
   link: string;
+}
+
+export interface PageInfo {
+  uaAddress: string;
+  plAddress: string;
+  phoneNuber: string;
+  email: string;
+  additionalEmail: string;
+  facebookLink: string;
+  uaPageTitle: string;
+  plPageTitle: string;
+  id: string;
 }

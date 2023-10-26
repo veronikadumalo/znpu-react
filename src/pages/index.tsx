@@ -4,10 +4,14 @@ import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
 import testImage from "../assets/images/test-image.png";
 import nataliaTulasiewiczImage from "../assets/images/natalia-tulasiewicz.png";
-import { POSTS } from "../data/newsPosts";
 import { NewPost } from "../components/NewPost";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { NEWS } from "../graphql/query/news";
+import { Post } from "../types/general";
+import { setGlobalState } from "../context/state";
 
 const StyledContent = styled.div`
   overflow: hidden;
@@ -122,6 +126,19 @@ const StyledSectionContent = styled.div`
 `;
 
 export default function Page() {
+  const [newsData, setNewsData] = useState<Post[] | []>([]);
+  const [news, { loading }] = useLazyQuery(NEWS, {
+    onCompleted: (data) => {
+      if (!data) return;
+      setNewsData(data.news.slice(0, 4));
+    },
+  });
+  useEffect(() => {
+    news();
+  }, []);
+  useEffect(() => {
+    setGlobalState("isLoading", loading);
+  }, [loading]);
   return (
     <Layout>
       <StyledContent>
@@ -183,7 +200,7 @@ export default function Page() {
         <StyledNewsContainer>
           <StyledSectionTitle>aktualności</StyledSectionTitle>
           <div>
-            {POSTS.map((post, i) => (
+            {newsData?.map((post, i) => (
               <NewPost post={post} key={i} />
             ))}
           </div>

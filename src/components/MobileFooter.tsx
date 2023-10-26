@@ -4,6 +4,7 @@ import Link from "next/link";
 import { NAVIGATION } from "../data/navigation";
 import facebookIcon from "../assets/images/facebook-60.png";
 import Image from "next/image";
+import { PageInfo } from "../types/general";
 
 const StyledFooterContainer = styled.div`
   margin-top: auto;
@@ -41,6 +42,7 @@ const StyledLogo = styled(Image)`
 const StyledTitle = styled.h2`
   font-size: 14px;
   font-weight: 500;
+  max-width: 250px;
 `;
 const StyledContactContainer = styled.div`
   display: flex;
@@ -74,8 +76,10 @@ const StyledBottomText = styled.p`
   color: var(--secondary-light-text);
   padding-top: 30px;
 `;
-
-const MobileFooter = () => {
+interface FooterProps {
+  pageInfo?: PageInfo;
+}
+const MobileFooter = ({ pageInfo }: FooterProps) => {
   return (
     <StyledFooterContainer>
       <StyledFooterTitle href="/">
@@ -83,32 +87,30 @@ const MobileFooter = () => {
           src={logo}
           alt="Zjednoczenie nauczycieli polskich w Ukrainie"
         />
-        <StyledTitle>
-          Zjednoczenie nauczycieli <br />
-          polskich w Ukrainie
-        </StyledTitle>
+        <StyledTitle>{pageInfo?.plAddress}</StyledTitle>
       </StyledFooterTitle>
       <StyledContent>
         <StyledDetailsContainer>
           <StyledContactContainer>
+            <StyledAddress>{pageInfo?.plAddress}</StyledAddress>
             <StyledAddress>
-              82100 Drohobycz ul. Truskawiecka <br />
-              9, obwód lwowski
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: String(pageInfo?.uaAddress),
+                }}
+              />
             </StyledAddress>
-            <StyledAddress>
-              Укрпошта <br />
-              82100 Дрогобич <br />
-              вул. Данила Галицького, 21 а/с № 17
-            </StyledAddress>
-            <StyledLink href="tel:0324450177">03244 50177</StyledLink>
-            <StyledLink href="mailto:adam-ch@mail.lviv.ua">
-              adam-ch@mail.lviv.ua
+            <StyledLink href="tel:0324450177">
+              {pageInfo?.phoneNuber}
             </StyledLink>
-            <StyledLink href="mailto:znpu.ua@gmail.com">
-              znpu.ua@gmail.com
+            <StyledLink href={`mailto:${pageInfo?.email}`}>
+              {pageInfo?.email}
+            </StyledLink>
+            <StyledLink href={`mailto:${pageInfo?.additionalEmail}`}>
+              {pageInfo?.additionalEmail}
             </StyledLink>
             <StyledLink
-              href="https://www.facebook.com/CentrumDrohobycz"
+              href={pageInfo?.facebookLink || ""}
               className="facebookLink"
             >
               <Image

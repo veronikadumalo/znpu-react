@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import DesktopNavigation from "./DesktopNavigation";
 import Footer from "./Footer";
 import DesktopTopbar from "./DesktopTopbar";
@@ -6,8 +6,11 @@ import styled from "styled-components";
 import MobileNavigation from "./MobileNavigation";
 import MobileFooter from "./MobileFooter";
 import PageWrapper from "./PageWrapper";
-import { useGlobalState } from "../context/state";
+import { setGlobalState, useGlobalState } from "../context/state";
 import LoadingAnimation from "./LoadingAnimation";
+import { useLazyQuery } from "@apollo/client";
+import { PAGE_INFO } from "../graphql/query/pageInfo";
+import { PageInfo } from "../types/general";
 
 interface LayoutProps {
   children: ReactNode;
@@ -32,6 +35,22 @@ const StyledChildrenContainer = styled.div`
 
 const Layout = ({ children }: LayoutProps) => {
   const [isLoading] = useGlobalState("isLoading");
+  const [pageInfoData, setPageInfoData] = useState<PageInfo | undefined>(
+    undefined
+  );
+  const [pageInfo, { loading }] = useLazyQuery(PAGE_INFO, {
+    onCompleted: (data) => {
+      if (!data) return;
+      setPageInfoData(data.pageInfo[0]);
+    },
+  });
+  console.log(pageInfoData);
+  useEffect(() => {
+    pageInfo();
+  }, []);
+  useEffect(() => {
+    setGlobalState("isLoading", loading);
+  }, [loading]);
   return (
     <>
       <PageWrapper>
@@ -41,8 +60,8 @@ const Layout = ({ children }: LayoutProps) => {
           <MobileNavigation />
           <StyledChildrenContainer>{children}</StyledChildrenContainer>
         </StyledContent>
-        <Footer />
-        <MobileFooter />
+        <Footer pageInfo={pageInfoData} />
+        <MobileFooter pageInfo={pageInfoData} />
         {isLoading ? <LoadingAnimation /> : <></>}
       </PageWrapper>
     </>

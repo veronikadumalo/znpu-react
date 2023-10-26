@@ -8,16 +8,9 @@ import { Department } from "../../types/general";
 import DepartmentItem from "../../components/AdminPanel/EditDepartments/DepartmentItem";
 import AddNewDepartment from "../../components/AdminPanel/EditDepartments/AddNewDepartment";
 
-const StyledTitle = styled.h2`
-  font-size: 18px;
-  text-transform: uppercase;
-  padding-bottom: 20px;
-`;
 const StyledContent = styled.div`
-  padding: 30px;
+  padding: 30px 0;
 `;
-
-const StyledDepartment = styled.div``;
 
 export default function EditDepartments() {
   const [departmentsData, setDepartmentsData] = useState<Department[] | []>([]);
@@ -37,9 +30,8 @@ export default function EditDepartments() {
     setGlobalState("isLoading", loading);
   }, [loading]);
   return (
-    <PanelLayout>
+    <PanelLayout pageTitle={"Edycja oddziałów"}>
       <StyledContent>
-        <StyledTitle>Edycja oddziałów</StyledTitle>
         {departmentsData?.map((item) => (
           <DepartmentItem key={item.id} department={item} />
         ))}

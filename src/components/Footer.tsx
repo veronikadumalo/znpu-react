@@ -4,6 +4,7 @@ import Link from "next/link";
 import { NAVIGATION } from "../data/navigation";
 import facebookIcon from "../assets/images/facebook-60.png";
 import Image from "next/image";
+import { PageInfo } from "../types/general";
 
 const StyledFooterContainer = styled.div`
   margin-top: auto;
@@ -40,6 +41,7 @@ const StyledLogo = styled(Image)`
 const StyledTitle = styled.h2`
   font-size: 20px;
   font-weight: 500;
+  max-width: 250px;
 `;
 const StyledFooterMainContainer = styled.div`
   display: flex;
@@ -103,7 +105,11 @@ const StyledBottomText = styled.p`
   margin-top: 100px;
   color: var(--secondary-light-text);
 `;
-const Footer = () => (
+
+interface FooterProps {
+  pageInfo?: PageInfo;
+}
+const Footer = ({ pageInfo }: FooterProps) => (
   <StyledFooterContainer>
     <StyledFooterContent>
       <StyledFooterTitle href="/">
@@ -111,27 +117,22 @@ const Footer = () => (
           src={logo}
           alt="Zjednoczenie nauczycieli polskich w Ukrainie"
         />
-        <StyledTitle>
-          Zjednoczenie nauczycieli <br />
-          polskich w Ukrainie
-        </StyledTitle>
+        <StyledTitle>{pageInfo?.plPageTitle}</StyledTitle>
       </StyledFooterTitle>
       <StyledFooterMainContainer>
         <StyledContactContainer>
+          <StyledAddress>{pageInfo?.plAddress}</StyledAddress>
           <StyledAddress>
-            82100 Drohobycz ul. Truskawiecka 9 obwód lwowski
+            <span
+              dangerouslySetInnerHTML={{ __html: String(pageInfo?.uaAddress) }}
+            />
           </StyledAddress>
-          <StyledAddress>
-            Укрпошта <br />
-            82100 Дрогобич <br />
-            вул. Данила Галицького, 21 а/с № 17
-          </StyledAddress>
-          <StyledLink href="tel:0324450177">03244 50177</StyledLink>
-          <StyledLink href="mailto:adam-ch@mail.lviv.ua">
-            adam-ch@mail.lviv.ua
+          <StyledLink href="tel:0324450177">{pageInfo?.phoneNuber}</StyledLink>
+          <StyledLink href={`mailto:${pageInfo?.email}`}>
+            {pageInfo?.email}
           </StyledLink>
-          <StyledLink href="mailto:znpu.ua@gmail.com">
-            znpu.ua@gmail.com
+          <StyledLink href={`mailto:${pageInfo?.additionalEmail}`}>
+            {pageInfo?.additionalEmail}
           </StyledLink>
         </StyledContactContainer>
         <StyledFooterPageMap>
@@ -142,10 +143,7 @@ const Footer = () => (
           ))}
         </StyledFooterPageMap>
       </StyledFooterMainContainer>
-      <StyledLink
-        href="https://www.facebook.com/CentrumDrohobycz"
-        className="facebookLink"
-      >
+      <StyledLink href={pageInfo?.facebookLink || ""} className="facebookLink">
         <Image src={facebookIcon} alt="Facebook Icon" height={40} width={40} />
       </StyledLink>
       <StyledBottomText>

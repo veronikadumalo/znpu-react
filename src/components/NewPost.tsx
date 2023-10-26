@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Post } from "../types/general";
 import Image from "next/image";
+import imagePlaceholder from "../assets/images/test-image.png";
 
 interface NewPostProps {
   post: Post;
@@ -39,11 +40,11 @@ const StyledDate = styled.p`
 
 export const NewPost = ({ post }: NewPostProps) => (
   <StyledContainer>
-    <StyledImage src={post.image} alt={post.title} />
+    <StyledImage src={imagePlaceholder} alt={post.title} />
     <StyledTextContent>
       <StyledTitle>{post.title}</StyledTitle>
-      <StyledDescription>{post.description}</StyledDescription>
-      <StyledDate>{post.date}</StyledDate>
+      <StyledDescription>{post.subtitle}</StyledDescription>
+      <StyledDate>{post.updatedAt}</StyledDate>
     </StyledTextContent>
   </StyledContainer>
 );
