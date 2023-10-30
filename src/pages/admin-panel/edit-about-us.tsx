@@ -194,6 +194,7 @@ export default function EditPost() {
               type="file"
               id="file-input"
               name="file-input"
+              accept="image/*"
               onChange={(e) =>
                 handleFileSelect(e.target.files ? e.target.files[0] : undefined)
               }
