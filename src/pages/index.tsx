@@ -10,8 +10,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { NEWS } from "../graphql/query/news";
-import { Post } from "../types/general";
+import { HomePageInfo, Post } from "../types/general";
 import { setGlobalState } from "../context/state";
+import { HOME_PAGE_CONTENT } from "../graphql/query/homePageContent";
 
 const StyledContent = styled.div`
   overflow: hidden;
@@ -126,45 +127,51 @@ const StyledSectionContent = styled.div`
 `;
 
 export default function Page() {
+  const [aboutUsPageInfo, setAboutUsPageInfo] = useState<
+    HomePageInfo | undefined
+  >(undefined);
   const [newsData, setNewsData] = useState<Post[] | []>([]);
+
   const [news, { loading }] = useLazyQuery(NEWS, {
     onCompleted: (data) => {
       if (!data) return;
       setNewsData(data.news.slice(0, 4));
     },
   });
+  const [homePageContent, { loading: homePageContentLoading }] = useLazyQuery(
+    HOME_PAGE_CONTENT,
+    {
+      onCompleted: (data) => {
+        if (!data) return;
+        const pageInfo = data.homePageContent.find(
+          (item: any) => item.type === "aboutUs"
+        );
+        setAboutUsPageInfo(pageInfo);
+      },
+    }
+  );
+
   useEffect(() => {
     news();
+    homePageContent();
   }, []);
   useEffect(() => {
-    setGlobalState("isLoading", loading);
-  }, [loading]);
+    setGlobalState("isLoading", loading || homePageContentLoading);
+  }, [loading, homePageContentLoading]);
   return (
     <Layout>
       <StyledContent>
         <SubMenu submenuItems={NAVIGATION[0].subpages} />
         <StyledAboutUsContainer>
-          <StyledSectionTitle>o nas</StyledSectionTitle>
+          <StyledSectionTitle>{aboutUsPageInfo?.homeTitle}</StyledSectionTitle>
           <StyledSectionContent>
             <StyledAboutUsImage src={testImage} alt="O nas" />
             <StyledDescription>
-              Zrzeszamy nauczycieli języka polskiego i przedmiotów nauczanych po
-              polsku w przedszkolach, szkołach średnich, wyższych i punktach
-              pozaszkolnych. Popularyzujemy wiedzę o polskiej kulturze i
-              historii. Pomagamy podnosić kwalifikacje nauczycieli, tworzyć
-              programy nauczania. Opracowujemy i zaopatrujemy szkoły w
-              podręczniki i pomoce szkolne. Udzielamy pomocy metodycznej i
-              dydaktycznej swoim członkom, przeprowadzamy konferencje
-              naukowo-praktyczne, seminaria, szkolenia i staże, a także obozy i
-              wczasy, festiwale, konkursy, olimpiady przedmiotowe, kongresy i
-              zjazdy z udziałem ekspertów z kraju i zagranicy. Wysyłamy także
-              dzieci, młodzież i osoby dorosłe na staże w wyższych,
-              specjalistycznych i średnich placówkach oświatowych, wspieramy
-              również inne formy nauki na Ukrainie i poza jej granicami.
-              Publikujemy wybitne prace zagranicznych i miejscowych ekspertów w
-              zakresie oświaty, okazujemy materialną i metodyczną pomoc
-              placówkom oświatowym. Prowadzimy wymianę doświadczeń między
-              nauczycielami z Polski, Ukrainy i innych państw.
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: String(aboutUsPageInfo?.shortDescription || ""),
+                }}
+              />
             </StyledDescription>
           </StyledSectionContent>
           <StyledMoreLink href="/o-nas">więcej {`  >`}</StyledMoreLink>

@@ -45,3 +45,13 @@ export interface PageInfo {
   plPageTitle: string;
   id: string;
 }
+
+export interface HomePageInfo {
+  homeTitle: string;
+  id: string;
+  imageUrl: string;
+  longDescription: string;
+  pageTitle: string;
+  shortDescription: string;
+  type: string;
+}
