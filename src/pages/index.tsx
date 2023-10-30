@@ -165,7 +165,16 @@ export default function Page() {
         <StyledAboutUsContainer>
           <StyledSectionTitle>{aboutUsPageInfo?.homeTitle}</StyledSectionTitle>
           <StyledSectionContent>
-            <StyledAboutUsImage src={testImage} alt="O nas" />
+            <StyledAboutUsImage
+              src={
+                aboutUsPageInfo?.imageUrl
+                  ? aboutUsPageInfo?.imageUrl
+                  : testImage
+              }
+              alt="O nas"
+              width={300}
+              height={300}
+            />
             <StyledDescription>
               <span
                 dangerouslySetInnerHTML={{

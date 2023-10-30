@@ -1,20 +1,26 @@
 import styled from "styled-components";
 import PanelLayout from "../../components/AdminPanel/PanelLayout";
 import { useEffect, useState } from "react";
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { setGlobalState } from "../../context/state";
-import { Post } from "../../types/general";
-import { NEWS } from "../../graphql/query/news";
-import NewItem from "../../components/AdminPanel/EditNews/NewItem";
-import { DELETE_NEWS } from "../../graphql/mutation/deleteNews";
 import { useRouter } from "next/router";
-import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { UPDATE_NEWS } from "../../graphql/mutation/updateNews";
 import { CREATE_NEWS } from "../../graphql/mutation/createNews";
+import Image from "next/image";
+import { uploadPhoto } from "../../utils/uploadPhoto";
 
 const StyledContent = styled.div`
   padding: 30px;
+  #file-input {
+    display: none;
+  }
+
+  #file-input-label {
+    font-size: 14px;
+    padding: 5px 8px;
+    border: 1px solid black;
+    border-radius: 4%;
+  }
 `;
 const StyledForm = styled.form`
   display: flex;
@@ -52,10 +58,21 @@ const StyledButton = styled.button`
   padding: 5px;
   cursor: pointer;
 `;
+const StyledMainImage = styled(Image)`
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+`;
+const StyledImageContainer = styled.div`
+  display: flex;
+  gap: 15px;
+  align-items: center;
+`;
 
 export default function EditPost() {
   const router = useRouter();
   const { register, handleSubmit, getValues } = useForm();
+  const [selectedFile, setSelectedFile] = useState<File | undefined>(undefined);
 
   const [createNews, { loading }] = useMutation(CREATE_NEWS, {
     onCompleted: (data) => {
@@ -70,7 +87,9 @@ export default function EditPost() {
         title: getValues("title"),
         subtitle: getValues("subtitle"),
         description: getValues("description"),
-        imageUrl: "string",
+        imageUrl: selectedFile
+          ? `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${selectedFile.name}`
+          : "noPhoto",
       },
     });
   };
@@ -79,6 +98,12 @@ export default function EditPost() {
     setGlobalState("isLoading", loading);
   }, [loading]);
 
+  const handleFileSelect = async (file?: File) => {
+    const result = uploadPhoto(file);
+    if (await result) {
+      setSelectedFile(file);
+    }
+  };
   return (
     <PanelLayout pageTitle={"Dodawanie nowej aktualności"}>
       <StyledContent>
@@ -112,6 +137,30 @@ export default function EditPost() {
               placeholder="Oпис"
             />
           </StyledFormItem>
+          <StyledImageContainer>
+            {selectedFile ? (
+              <StyledMainImage
+                src={URL.createObjectURL(selectedFile)}
+                alt="Page image"
+                width={300}
+                height={300}
+              />
+            ) : (
+              <></>
+            )}
+            <input
+              type="file"
+              id="file-input"
+              name="file-input"
+              accept="image/*"
+              onChange={(e) =>
+                handleFileSelect(e.target.files ? e.target.files[0] : undefined)
+              }
+            />
+            <label id="file-input-label" htmlFor="file-input">
+              Додати нове зображення
+            </label>
+          </StyledImageContainer>
           <StyledButton type="submit">Додати</StyledButton>
         </StyledForm>
       </StyledContent>

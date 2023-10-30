@@ -18,6 +18,7 @@ const StyledContainer = styled.div`
 const StyledImage = styled(Image)`
   width: 100px;
   height: 100px;
+  object-fit: cover;
 `;
 const StyledTextContent = styled.div`
   display: flex;
@@ -40,7 +41,12 @@ const StyledDate = styled.p`
 
 export const NewPost = ({ post }: NewPostProps) => (
   <StyledContainer>
-    <StyledImage src={imagePlaceholder} alt={post.title} />
+    <StyledImage
+      src={post.imageUrl ? post.imageUrl : imagePlaceholder}
+      alt={post.title}
+      width={100}
+      height={100}
+    />
     <StyledTextContent>
       <StyledTitle>{post.title}</StyledTitle>
       <StyledDescription>{post.subtitle}</StyledDescription>
