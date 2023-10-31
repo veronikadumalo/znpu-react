@@ -71,7 +71,6 @@ function OlympiadTasks() {
               <StyledOlympiadYears>{item.years}</StyledOlympiadYears>
               <FileContainer>
                 {item.files.map((file) => {
-                  console.log(file.link.length);
                   return (
                     <FileLink
                       key={file.link}

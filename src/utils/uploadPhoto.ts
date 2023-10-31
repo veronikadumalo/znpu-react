@@ -24,10 +24,7 @@ export const uploadPhoto = async (file?: File) => {
       ["content-length-range", 0, 5048576], // up to 1 MB
     ],
   });
-  console.log(post);
 
-  // const res = await fetch(`/api/upload-image?file=${filename}`);
-  // const data = await res.json();
   const formData = new FormData();
 
   Object.entries({ ...post.fields, file }).forEach(([key, value]) => {
@@ -42,7 +39,7 @@ export const uploadPhoto = async (file?: File) => {
     const isFileUploaded = await fileRes.ok;
     return isFileUploaded;
   } catch {
-    console.log("errro");
+    console.log("error");
     return false;
   }
 };

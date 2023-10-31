@@ -44,7 +44,6 @@ const Layout = ({ children }: LayoutProps) => {
       setPageInfoData(data.pageInfo[0]);
     },
   });
-  console.log(pageInfoData);
   useEffect(() => {
     pageInfo();
   }, []);

@@ -29,7 +29,7 @@ const StyledTitle = styled.h2`
     font-size: 17px;
   }
 `;
-const StyledStatuteContent = styled.p`
+const StyledStatuteContent = styled.div`
   font-size: 16px;
   line-height: 20px;
   padding-bottom: 30px;

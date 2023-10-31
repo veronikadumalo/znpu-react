@@ -43,7 +43,6 @@ export default function AddNewPerson({ departmentId }: AddNewPersonProps) {
   });
   const { register, handleSubmit, getValues } = useForm();
   const onSubmit = () => {
-    console.log("submit");
     createPersona({
       variables: {
         deparmentId: departmentId,
