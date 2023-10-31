@@ -92,6 +92,7 @@ export default function EditPost() {
     {
       onCompleted: (data) => {
         if (!data) return;
+        alert("Зміни збережено");
         router.push("/admin-panel/edit-news");
       },
     }
@@ -101,6 +102,7 @@ export default function EditPost() {
     {
       onCompleted: (data) => {
         if (!data) return;
+        alert("Зміни збережено");
         router.push("/admin-panel/edit-news");
       },
     }

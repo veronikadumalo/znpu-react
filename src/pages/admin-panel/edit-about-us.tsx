@@ -98,6 +98,7 @@ export default function EditPost() {
     {
       onCompleted: (data) => {
         if (!data) return;
+        alert("Зміни збережено");
         // router.push("/admin-panel");
       },
     }

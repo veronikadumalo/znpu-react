@@ -38,6 +38,7 @@ export default function EditNews() {
     {
       onCompleted: (data) => {
         if (!data) return;
+        alert("Зміни збережено");
         refetch().then((result) => {
           if (!result) return;
           setNewsData(result.data.news);
