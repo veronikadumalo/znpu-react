@@ -3,7 +3,6 @@ import PageWrapper from "../../components/PageWrapper";
 import Link from "next/link";
 import logo from "../../assets/images/logo.png";
 import Image from "next/image";
-import { ADMIN_PANEL_MENU } from "../../data/adminPanel/menu";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
