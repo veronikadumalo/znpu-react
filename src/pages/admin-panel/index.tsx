@@ -4,6 +4,9 @@ import Link from "next/link";
 import logo from "../../assets/images/logo.png";
 import Image from "next/image";
 import { ADMIN_PANEL_MENU } from "../../data/adminPanel/menu";
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const StyledContainer = styled.div``;
 const StyledTitle = styled(Link)`
@@ -36,30 +39,67 @@ const StyledLogo = styled(Image)`
     width: 70px;
   }
 `;
-const StyledMenuItem = styled.div`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 50px;
+  gap: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 30px;
 `;
-const StyledMainMenuItemLink = styled(Link)`
-  padding: 15px;
-  text-decoration: none;
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--white);
-  background-color: var(--primary);
+const StyledFormItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 `;
-const StyledSubmenuItemLink = styled(Link)`
-  padding: 15px;
-  text-decoration: none;
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--white);
-  background-color: var(--secondary);
+const StyledFormTitle = styled.h2`
+  text-align: center;
+  padding-bottom: 15px;
 `;
+const StyledLabel = styled.label``;
+const StyledInput = styled.input`
+  padding: 8px 4px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  outline: none;
+`;
+const StyledButton = styled.button`
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+`;
+const StyledError = styled.p`
+  height: 10px;
+  color: red;
+  font-size: 11px;
+`;
+
 export default function AdminPanel() {
+  const router = useRouter();
+  const { register, handleSubmit, getValues, setValue, watch } = useForm();
+  const [isPasswordOpened, setIsPasswordOpened] = useState<boolean>(false);
+  const [isLoginError, setIsLoginError] = useState<boolean>(false);
+  const onSubmit = () => {
+    const login = getValues("login");
+    const password = getValues("password");
+    if (
+      login === process.env.NEXT_PUBLIC_USER_LOGIN &&
+      password === process.env.NEXT_PUBLIC_USER_PASSOWRD
+    ) {
+      sessionStorage.setItem("isLogin", "true");
+      router.push("/admin-panel/menu");
+    } else {
+      setIsLoginError(true);
+    }
+  };
+  useEffect(() => {
+    setIsLoginError(false);
+  }, [watch("login"), watch("password")]);
   return (
     <PageWrapper>
       <StyledTitle href="/">
@@ -70,18 +110,33 @@ export default function AdminPanel() {
         </StyledHeading>
       </StyledTitle>
       <StyledContainer>
-        {ADMIN_PANEL_MENU.map((item) => (
-          <StyledMenuItem key={item.title}>
-            <StyledMainMenuItemLink href={item.link}>
-              {item.title}
-            </StyledMainMenuItemLink>
-            {item?.submenu?.map((submenuItem) => (
-              <StyledSubmenuItemLink href={submenuItem.link}>
-                {submenuItem.title}
-              </StyledSubmenuItemLink>
-            ))}
-          </StyledMenuItem>
-        ))}
+        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+          <StyledFormTitle>Вхід</StyledFormTitle>
+          <StyledFormItemContainer>
+            <StyledLabel>Логін</StyledLabel>
+            <StyledInput
+              id={"login"}
+              {...register("login")}
+              required={true}
+              placeholder="Логін"
+              type={"text"}
+            />
+          </StyledFormItemContainer>
+          <StyledFormItemContainer>
+            <StyledLabel>Пароль</StyledLabel>
+            <StyledInput
+              id={"password"}
+              {...register("password")}
+              required={true}
+              placeholder="Пароль"
+              type={"password"}
+            />
+          </StyledFormItemContainer>
+          <StyledError>
+            {isLoginError ? "Неправильний логін або пароль" : ""}
+          </StyledError>
+          <StyledButton type={"submit"}>Увійти</StyledButton>
+        </StyledForm>
       </StyledContainer>
     </PageWrapper>
   );
