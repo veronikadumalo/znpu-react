@@ -3,19 +3,19 @@ export const uploadPhoto = async (file?: File) => {
   if (!file) return null;
   const filename = encodeURIComponent(file.name);
   const s3 = new aws.S3({
-    accessKeyId: "AKIAVAGLBMHQSDODUESZ",
-    secretAccessKey: "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",
-    region: "eu-central-1",
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESSKEY_ID,
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_ACCESSKEY_SECRET,
+    region: process.env.NEXT_PUBLIC_AWS_REGION,
   });
   aws.config.update({
-    accessKeyId: "AKIAVAGLBMHQSDODUESZ",
-    secretAccessKey: "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",
-    region: "eu-central-1",
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESSKEY_ID,
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_ACCESSKEY_SECRET,
+    region: process.env.NEXT_PUBLIC_AWS_REGION,
     signatureVersion: "v4",
   });
 
   const post = await s3.createPresignedPost({
-    Bucket: "znpu-bucket",
+    Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
     Fields: {
       key: filename,
     },
