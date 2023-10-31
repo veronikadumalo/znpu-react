@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
-import nataliaTulasiewiczImage from "../assets/images/natalia-tulasiewicz.png";
 import Image from "next/image";
 import { HomePageInfo } from "../types/general";
 import { useEffect, useState } from "react";

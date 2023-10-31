@@ -3,7 +3,11 @@ import Layout from "../components/Layout";
 import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
 import FileLink from "../components/FileLink";
-import { STATUTE } from "../data/statute";
+import { useEffect, useState } from "react";
+import { HomePageInfo } from "../types/general";
+import { HOME_PAGE_CONTENT } from "../graphql/query/homePageContent";
+import { setGlobalState } from "../context/state";
+import { useLazyQuery } from "@apollo/client";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -40,15 +44,37 @@ const StyledStatuteContent = styled.div`
 `;
 
 function Statute() {
+  const [statutPageInfo, setStatutPageInfo] = useState<
+    HomePageInfo | undefined
+  >(undefined);
+  const [homePageContent, { loading }] = useLazyQuery(HOME_PAGE_CONTENT, {
+    onCompleted: (data) => {
+      if (!data) return;
+      const pageInfo = data.homePageContent.find(
+        (item: any) => item.type === "statut"
+      );
+      setStatutPageInfo(pageInfo);
+    },
+  });
+  useEffect(() => {
+    homePageContent();
+  }, []);
+  useEffect(() => {
+    setGlobalState("isLoading", loading);
+  }, [loading]);
   return (
     <Layout>
       <StyledContainer>
         <SubMenu submenuItems={NAVIGATION[0].subpages} />
         <StyledContent>
-          <StyledTitle>
-            Zjednoczenie Nauczycieli Polskich na Ukrainie – witamy!
-          </StyledTitle>
-          <StyledStatuteContent>{STATUTE}</StyledStatuteContent>
+          <StyledTitle>{statutPageInfo?.pageTitle}</StyledTitle>
+          <StyledStatuteContent>
+            <span
+              dangerouslySetInnerHTML={{
+                __html: String(statutPageInfo?.longDescription || ""),
+              }}
+            />
+          </StyledStatuteContent>
           <FileLink fileLink="/statut.docx" title="Statut " />
           <FileLink fileLink="/Статут.doc" title="Статут" />
         </StyledContent>
