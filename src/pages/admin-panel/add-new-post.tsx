@@ -88,7 +88,7 @@ export default function EditPost() {
         subtitle: getValues("subtitle"),
         description: getValues("description"),
         imageUrl: selectedFile
-          ? `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${selectedFile.name}`
+          ? `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.eu-central-1.amazonaws.com/${selectedFile.name}`
           : "noPhoto",
       },
     });

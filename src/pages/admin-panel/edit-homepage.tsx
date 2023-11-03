@@ -56,7 +56,7 @@ export default function EditHomepage() {
   const [updatePageInfo, { loading }] = useMutation(UPDATE_PAGE_INFO, {
     onCompleted: (data) => {
       if (!data) return;
-      router.push("/admin-panel");
+      router.push("/admin-panel/menu");
     },
   });
 
