@@ -130,6 +130,9 @@ export default function Page() {
   const [aboutUsPageInfo, setAboutUsPageInfo] = useState<
     HomePageInfo | undefined
   >(undefined);
+  const [NTPageInfo, setNTPageInfo] = useState<HomePageInfo | undefined>(
+    undefined
+  );
   const [newsData, setNewsData] = useState<Post[] | []>([]);
 
   const [news, { loading }] = useLazyQuery(NEWS, {
@@ -146,7 +149,11 @@ export default function Page() {
         const pageInfo = data.homePageContent.find(
           (item: any) => item.type === "aboutUs"
         );
+        const NTPageInfo = data.homePageContent.find(
+          (item: any) => item.type === "natalia"
+        );
         setAboutUsPageInfo(pageInfo);
+        setNTPageInfo(NTPageInfo);
       },
     }
   );
@@ -186,29 +193,16 @@ export default function Page() {
           <StyledMoreLink href="/o-nas">więcej {`  >`}</StyledMoreLink>
         </StyledAboutUsContainer>
         <StyledGirlContainer>
-          <StyledGirlTitle>
-            «Wybrał mnie pan do cudownej misji miłości w świecie» dla której
-            zycie oddać warto, a cóż dopiero talent i wszystkie siły
-          </StyledGirlTitle>
+          <StyledGirlTitle>{NTPageInfo?.homeTitle}</StyledGirlTitle>
           <StyledImageContainer>
             <StyledGirlImage
-              src={nataliaTulasiewiczImage}
+              src={NTPageInfo?.imageUrl ? NTPageInfo.imageUrl : testImage}
               alt="Natalia Tulasiewicz"
+              width={300}
+              height={300}
             />
           </StyledImageContainer>
-          <StyledDescription>
-            Natalia Tułasiewicz urodziła się 9 kwietnia 1906 roku w Rzeszowie.
-             Jej rodzina pochodziła z Krakowa. Od 1913 roku uczęszczała do
-            Szkoły Podstawowej w Kętach, a od 1917 roku była uczennicą
-            Prywatnego Gimnazjum Żeńskiego w Krakowie. W 1921 roku przeniosła
-            się wraz z rodziną do Poznania. Tam rozpoczęła naukę w
-            Gimnazjum Sióstr Urszulanek Unii Rzymskiej. Ukończyła je w 1926
-            roku. Po maturze studiowała polonistykę i muzykologię na
-            Uniwersytecie Poznańskim. Studia ukończyła w 1931 roku. W 1932 roku
-            obroniła pracę ,,Mickiewicz a muzyka” i uzyskała tytuł magistra
-            filologii polskiej. Na wszystkich etapach edukacyjnych dała się
-            poznać jako ambitna, zdolna uczennica....
-          </StyledDescription>
+          <StyledDescription>{NTPageInfo?.shortDescription}</StyledDescription>
           <StyledMoreLink href="/natalia-tulasiewicz">
             więcej {`  >`}
           </StyledMoreLink>
