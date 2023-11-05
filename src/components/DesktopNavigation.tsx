@@ -88,7 +88,7 @@ const DesktopNavigation = () => {
   const [hoveredNavigationItem, setHoveredNavigationItem] =
     useState<NavigationLink | null>(null);
   const router = useRouter();
-
+  console.log(router.asPath);
   return (
     <StyledNavigationContainer
       onMouseLeave={() => setHoveredNavigationItem(null)}
@@ -96,9 +96,8 @@ const DesktopNavigation = () => {
     >
       {NAVIGATION.map((item) => {
         const isActive =
-          Boolean(
-            item.subpages?.find((item) => item.link === router.pathname)
-          ) || item.link === router.pathname;
+          Boolean(item.subpages?.find((item) => item.link === router.asPath)) ||
+          item.link === router.asPath;
         return (
           <StyledNavigationLink
             href={item.link}

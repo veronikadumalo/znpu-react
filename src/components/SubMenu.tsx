@@ -51,7 +51,7 @@ export const SubMenu = ({ submenuItems }: SubMenuProps) => {
         <StyledItemLink
           key={item.title}
           href={item.link}
-          isActive={router.pathname === item.link}
+          isActive={router.asPath === item.link}
         >
           {item.title}
         </StyledItemLink>

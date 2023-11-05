@@ -46,4 +46,30 @@ export const ADMIN_PANEL_MENU: AdminPanelMenu[] = [
       },
     ],
   },
+  {
+    title: "Wydarzenia",
+    link: "/admin-panel/menu",
+    submenu: [
+      {
+        title: "Kursy",
+        link: "/admin-panel/edit-events?eventType=course",
+      },
+      {
+        title: "Konferencje",
+        link: "/admin-panel/edit-events?eventType=conference",
+      },
+      {
+        title: "Seminary",
+        link: "/admin-panel/edit-events?eventType=seminar",
+      },
+      {
+        title: "Olimpiady",
+        link: "/admin-panel/edit-events?eventType=olympiad",
+      },
+      {
+        title: "Dyktando",
+        link: "/admin-panel/edit-events?eventType=dictation",
+      },
+    ],
+  },
 ];

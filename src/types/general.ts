@@ -55,3 +55,19 @@ export interface HomePageInfo {
   shortDescription: string;
   type: string;
 }
+
+export interface Event {
+  id: string;
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+  images: string[];
+  type: EventType;
+  createdAt: string;
+}
+export type EventType =
+  | "course"
+  | "conference"
+  | "seminar"
+  | "olympiad"
+  | "dictation";

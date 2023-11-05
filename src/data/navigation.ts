@@ -41,19 +41,19 @@ export const NAVIGATION: NavigationLink[] = [
   },
   {
     title: "wydzarzenia",
-    link: "/kursy",
+    link: "/events?eventType=course",
     subpages: [
-      { title: "kursy", link: "/kursy" },
-      { title: "konferencje", link: "/konferencje" },
+      { title: "kursy", link: "/events?eventType=course" },
+      { title: "konferencje", link: "/events?eventType=conference" },
       {
         title: "seminaria",
-        link: "/seminaria",
+        link: "/events?eventType=seminar",
       },
       {
         title: "olimpiady",
-        link: "/olimpiady",
+        link: "/events?eventType=olympiad",
       },
-      { title: "dyktando", link: "/dyktando" },
+      { title: "dyktando", link: "/events?eventType=dictation" },
     ],
   },
   {
