@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { getEventTitle } from "../utils/getEventTitle";
 import styled from "styled-components";
 import { Event } from "../types/general";
-import { WYDAŻENIA } from "../data/wydarzenia";
 import Link from "next/link";
 import Image from "next/image";
+import { useLazyQuery } from "@apollo/client";
+import { setGlobalState } from "../context/state";
+import { EVENTS_BY_TYPE } from "../graphql/query/eventsByType";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -72,7 +74,13 @@ function Events() {
   const router = useRouter();
   const [eventType, setEventType] = useState<string | undefined>(undefined);
   const [pageTitle, setPageTitle] = useState<string | undefined>(undefined);
-  const [events, setEvents] = useState<Event[] | []>([]);
+  const [eventsData, setEventsData] = useState<Event[] | []>([]);
+  const [events, { loading }] = useLazyQuery(EVENTS_BY_TYPE, {
+    onCompleted: (data) => {
+      if (!data) return;
+      setEventsData(data.eventsByType);
+    },
+  });
 
   useEffect(() => {
     if (!router) return;
@@ -84,9 +92,12 @@ function Events() {
     if (!eventType) return;
     const title = getEventTitle(eventType);
     setPageTitle(title);
-    const pageEvents = WYDAŻENIA.filter((item) => item.type === eventType);
-    setEvents(pageEvents);
+    events({ variables: { type: eventType } });
   }, [eventType]);
+
+  useEffect(() => {
+    setGlobalState("isLoading", loading);
+  }, [loading]);
   return (
     <Layout>
       <StyledContainer>
@@ -94,7 +105,7 @@ function Events() {
         <StyledContent>
           <StyledTitle>{pageTitle}</StyledTitle>
           <StyledEventList>
-            {events.map((event) => (
+            {eventsData?.map((event) => (
               <Link href={`/event?id=${event.id}`} key={event.id}>
                 <StyledEventItem>
                   <StyledMainImage

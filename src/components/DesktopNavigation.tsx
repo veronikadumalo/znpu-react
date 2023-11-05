@@ -88,7 +88,6 @@ const DesktopNavigation = () => {
   const [hoveredNavigationItem, setHoveredNavigationItem] =
     useState<NavigationLink | null>(null);
   const router = useRouter();
-  console.log(router.asPath);
   return (
     <StyledNavigationContainer
       onMouseLeave={() => setHoveredNavigationItem(null)}
