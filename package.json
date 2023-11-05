@@ -32,8 +32,10 @@
     "react-hook-form": "^7.46.0",
     "react-hooks-global-state": "^2.1.0",
     "react-pdf": "^6.2.2",
+    "react-responsive-carousel": "^3.2.23",
     "sharp": "^0.32.6",
     "styled-components": "^5.3.9",
+    "swiper": "^11.0.3",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
