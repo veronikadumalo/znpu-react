@@ -48,6 +48,9 @@ const StyledContainer = styled.div`
     height: 100%;
     opacity: 0.4;
   }
+  .mySwiper .swiper-wrapper {
+    justify-content: center;
+  }
 
   .mySwiper .swiper-slide-thumb-active {
     opacity: 1;
@@ -87,6 +90,7 @@ const StyledMainImage = styled(Image)`
 function EventView() {
   const router = useRouter();
   const [eventData, setEventData] = useState<Event | undefined>(undefined);
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [eventsById, { loading }] = useLazyQuery(EVENTS_BY_ID, {
     onCompleted: (data) => {
       if (!data) return;
@@ -97,14 +101,13 @@ function EventView() {
   useEffect(() => {
     if (!router) return;
     const id = router.query.id;
-    console.log(id);
     eventsById({ variables: { id: String(id) } });
   }, [router]);
 
   useEffect(() => {
     setGlobalState("isLoading", loading);
   }, [loading]);
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+
   return (
     <Layout>
       <StyledContainer>
