@@ -37,6 +37,10 @@ export const ADMIN_PANEL_MENU: AdminPanelMenu[] = [
         link: "/admin-panel/edit-building-adaptation",
       },
       {
+        title: "Remont budynku",
+        link: "/admin-panel/edit-building-renovation",
+      },
+      {
         title: "Historia założenia",
         link: "/admin-panel/edit-founding-history",
       },

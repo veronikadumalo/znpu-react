@@ -1,9 +1,9 @@
-// import { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-// import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
-// import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
-// import SliderNavigation from "./SliderNavigation";
-// pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
+import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
+import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
+import SliderNavigation from "./SliderNavigation";
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -49,34 +49,34 @@ interface PdfSliderProps {
 
 const PdfSlider = ({ pdfFile }: PdfSliderProps) => {
   console.log(pdfFile);
-  // const [numPages, setNumPages] = useState<number | null>(null);
-  // const [pageNumber, setPageNumber] = useState<number>(1);
+  const [numPages, setNumPages] = useState<number | null>(null);
+  const [pageNumber, setPageNumber] = useState<number>(1);
 
-  // const onDocumentLoadSuccess = (pdf: PDFDocumentProxy) => {
-  //   setNumPages(pdf?._pdfInfo?.numPages || 0);
-  // };
+  const onDocumentLoadSuccess = (pdf: PDFDocumentProxy) => {
+    setNumPages(pdf?._pdfInfo?.numPages || 0);
+  };
 
-  // const handleNextClick = () => {
-  //   if (!numPages) return;
-  //   setPageNumber((prev) => {
-  //     if (prev < numPages) {
-  //       return prev + 1;
-  //     } else return prev;
-  //   });
-  // };
+  const handleNextClick = () => {
+    if (!numPages) return;
+    setPageNumber((prev) => {
+      if (prev < numPages) {
+        return prev + 1;
+      } else return prev;
+    });
+  };
 
-  // const handlePrevClick = () => {
-  //   if (!numPages) return;
-  //   setPageNumber((prev) => {
-  //     if (prev >= 2) {
-  //       return prev - 1;
-  //     } else return prev;
-  //   });
-  // };
+  const handlePrevClick = () => {
+    if (!numPages) return;
+    setPageNumber((prev) => {
+      if (prev >= 2) {
+        return prev - 1;
+      } else return prev;
+    });
+  };
 
   return (
     <StyledContainer>
-      {/* <Document
+      <Document
         file={pdfFile}
         onLoadSuccess={onDocumentLoadSuccess}
         className={"slider"}
@@ -94,7 +94,7 @@ const PdfSlider = ({ pdfFile }: PdfSliderProps) => {
         pageLength={numPages}
         handleNextClick={handleNextClick}
         handlePrevClick={handlePrevClick}
-      /> */}
+      />
     </StyledContainer>
   );
 };

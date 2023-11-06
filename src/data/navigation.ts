@@ -14,6 +14,7 @@ export const NAVIGATION: NavigationLink[] = [
       { title: "natalia tulasiewicz", link: "/natalia-tulasiewicz" },
       { title: "aktualności", link: "/aktualnosci" },
       { title: "adaptacja budynku", link: "/adaptacja-budynku" },
+      { title: "remont budynku", link: "/remont-budynku" },
       { title: "historia założenia", link: "/historia-zalozenia" },
       { title: "prawo ukraińskie", link: "/prawo-ukrainskie" },
     ],
