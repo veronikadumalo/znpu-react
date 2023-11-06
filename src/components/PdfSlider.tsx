@@ -1,10 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
-import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
+import { Document, Page, pdfjs } from "react-pdf";
 import SliderNavigation from "./SliderNavigation";
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
-
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const StyledContainer = styled.div`
   width: 100%;
   max-height: 700px;
@@ -52,7 +50,7 @@ const PdfSlider = ({ pdfFile }: PdfSliderProps) => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
 
-  const onDocumentLoadSuccess = (pdf: PDFDocumentProxy) => {
+  const onDocumentLoadSuccess = (pdf: any) => {
     setNumPages(pdf?._pdfInfo?.numPages || 0);
   };
 
