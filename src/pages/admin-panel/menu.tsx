@@ -49,6 +49,7 @@ const StyledMainMenuItemLink = styled(Link)`
   font-weight: 700;
   color: var(--white);
   background-color: var(--primary);
+  margin-top: 20px;
 `;
 const StyledSubmenuItemLink = styled(Link)`
   padding: 15px;
