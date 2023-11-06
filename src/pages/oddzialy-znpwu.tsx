@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { setGlobalState } from "../context/state";
 import { DEPARTAMENTS_QUERY } from "../graphql/query/departaments";
 import { Department } from "../types/general";
+import Image from "next/image";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -57,6 +58,9 @@ const StyledEmailLink = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
+  @media (max-width: 700px) {
+    margin-left: 60px;
+  }
 `;
 const StyledDepartmentPerson = styled.div`
   display: flex;
@@ -69,13 +73,27 @@ const StyledDepartmentPerson = styled.div`
   }
 `;
 const StyledPersonName = styled.p``;
+const StyledAvatar = styled(Image)`
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+`;
+const StyledLeftContent = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+`;
 
 export default function Departments() {
   const [departmentsData, setDepartmentsData] = useState<Department[] | []>([]);
   const [departments, { loading }] = useLazyQuery(DEPARTAMENTS_QUERY, {
     onCompleted: (data) => {
       if (!data) return;
-      setDepartmentsData(data.deparments);
+      const deparments = [...data.deparments].sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
+      setDepartmentsData(deparments);
     },
     onError: () => setGlobalState("isError", true),
   });
@@ -99,7 +117,18 @@ export default function Departments() {
                 <StyledDeparmentTitle>{department.title}</StyledDeparmentTitle>
                 {department.persons.map((person) => (
                   <StyledDepartmentPerson key={person.name}>
-                    <StyledPersonName>{person.name}</StyledPersonName>
+                    <StyledLeftContent>
+                      {person?.avatar && (
+                        <StyledAvatar
+                          src={person?.avatar}
+                          alt="Avatar"
+                          width={80}
+                          height={80}
+                        />
+                      )}
+                      <StyledPersonName>{person.name}</StyledPersonName>
+                    </StyledLeftContent>
+
                     {person.email && (
                       <StyledEmailLink href={`mailto:${person.email}`}>
                         {person.email}

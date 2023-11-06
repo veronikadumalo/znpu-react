@@ -8,6 +8,7 @@ export const DEPARTAMENTS_QUERY = gql`
         email
         id
         name
+        avatar
       }
       title
     }
