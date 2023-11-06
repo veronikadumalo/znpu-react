@@ -11,6 +11,7 @@ import { Event } from "../../types/general";
 import trashIcon from "../../assets/images/trash-icon.svg";
 import editIcon from "../../assets/images/edit-icon.png";
 import { DELETE_EVENT } from "../../graphql/mutation/deleteEvent";
+import { getFormattedDate } from "../../utils/getFormattedDate";
 
 const StyledContent = styled.div`
   padding: 30px;
@@ -96,7 +97,12 @@ export default function EditEvents() {
   const [eventsByType, { loading, refetch }] = useLazyQuery(EVENTS_BY_TYPE, {
     onCompleted: (data) => {
       if (!data) return;
-      setEventsData(data.eventsByType);
+      const newArr = [...data.eventsByType].sort(function (a: any, b: any) {
+        const dateA = new Date(a.customerDate).getTime();
+        const dateB = new Date(b.customerDate).getTime();
+        return dateA < dateB ? 1 : -1; // ? -1 : 1 for ascending/increasing order
+      });
+      setEventsData(newArr);
     },
     fetchPolicy: "cache-and-network",
   });
@@ -107,7 +113,15 @@ export default function EditEvents() {
         if (!data) return;
         refetch({ variables: { type: eventType } }).then((result) => {
           if (!result) return;
-          setEventsData(result.data.eventsByType);
+          const newArr = result.data.eventsByType.sort(function (
+            a: any,
+            b: any
+          ) {
+            const dateA = new Date(a.customerDate).getTime();
+            const dateB = new Date(b.customerDate).getTime();
+            return dateA < dateB ? 1 : -1; // ? -1 : 1 for ascending/increasing order
+          });
+          setEventsData(newArr);
         });
       },
     }
@@ -133,41 +147,49 @@ export default function EditEvents() {
     <PanelLayout pageTitle={pageTitle || ""}>
       <StyledContent>
         <StyledEventList>
-          {eventsData?.map((event) => (
-            <StyledEventContainer key={event.id}>
-              <StyledEventItem>
-                <StyledMainImage
-                  src={event.images[0]}
-                  width={200}
-                  height={200}
-                  alt={event.title}
-                />
-                <StyledEventContent>
-                  <StyledEventTitle>{event.title}</StyledEventTitle>
-                  <StyledEventDescription>
-                    {event.shortDescription}
-                  </StyledEventDescription>
-                  <StyledEventDate>{event.createdAt}</StyledEventDate>
-                </StyledEventContent>
-              </StyledEventItem>
-              <StyledButtonContainer>
-                <StyledIconButton
-                  onClick={() =>
-                    router.push(
-                      `/admin-panel/edit-event?eventType=${eventType}`
-                    )
-                  }
-                >
-                  <Image src={editIcon} alt="Edit" width={30} height={30} />
-                </StyledIconButton>
-                <StyledIconButton
-                  onClick={() => deleteEvent({ variables: { id: event.id } })}
-                >
-                  <Image src={trashIcon} alt="Delete" width={30} height={30} />
-                </StyledIconButton>
-              </StyledButtonContainer>
-            </StyledEventContainer>
-          ))}
+          {eventsData?.map((event) => {
+            const date = getFormattedDate(event.customerDate);
+            console.log(event.customerDate);
+            console.log(date);
+            return (
+              <StyledEventContainer key={event.id}>
+                <StyledEventItem>
+                  <StyledMainImage
+                    src={event.images[0]}
+                    width={200}
+                    height={200}
+                    alt={event.title}
+                  />
+                  <StyledEventContent>
+                    <StyledEventTitle>{event.title}</StyledEventTitle>
+                    <StyledEventDescription>
+                      {event.shortDescription}
+                    </StyledEventDescription>
+                    <StyledEventDate>{date}</StyledEventDate>
+                  </StyledEventContent>
+                </StyledEventItem>
+                <StyledButtonContainer>
+                  <StyledIconButton
+                    onClick={() =>
+                      router.push(`/admin-panel/edit-event?id=${event.id}`)
+                    }
+                  >
+                    <Image src={editIcon} alt="Edit" width={30} height={30} />
+                  </StyledIconButton>
+                  <StyledIconButton
+                    onClick={() => deleteEvent({ variables: { id: event.id } })}
+                  >
+                    <Image
+                      src={trashIcon}
+                      alt="Delete"
+                      width={30}
+                      height={30}
+                    />
+                  </StyledIconButton>
+                </StyledButtonContainer>
+              </StyledEventContainer>
+            );
+          })}
         </StyledEventList>
         <StyledButton
           onClick={() =>

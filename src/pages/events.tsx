@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useLazyQuery } from "@apollo/client";
 import { setGlobalState } from "../context/state";
 import { EVENTS_BY_TYPE } from "../graphql/query/eventsByType";
+import { getFormattedDate } from "../utils/getFormattedDate";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -78,7 +79,12 @@ function Events() {
   const [events, { loading }] = useLazyQuery(EVENTS_BY_TYPE, {
     onCompleted: (data) => {
       if (!data) return;
-      setEventsData(data.eventsByType);
+      const newArr = [...data.eventsByType].sort(function (a: any, b: any) {
+        const dateA = new Date(a.customerDate).getTime();
+        const dateB = new Date(b.customerDate).getTime();
+        return dateA < dateB ? 1 : -1; // ? -1 : 1 for ascending/increasing order
+      });
+      setEventsData(newArr);
     },
   });
 
@@ -105,25 +111,28 @@ function Events() {
         <StyledContent>
           <StyledTitle>{pageTitle}</StyledTitle>
           <StyledEventList>
-            {eventsData?.map((event) => (
-              <Link href={`/event?id=${event.id}`} key={event.id}>
-                <StyledEventItem>
-                  <StyledMainImage
-                    src={event.images[0]}
-                    width={200}
-                    height={200}
-                    alt={event.title}
-                  />
-                  <StyledEventContent>
-                    <StyledEventTitle>{event.title}</StyledEventTitle>
-                    <StyledEventDescription>
-                      {event.shortDescription}
-                    </StyledEventDescription>
-                    <StyledEventDate>{event.createdAt}</StyledEventDate>
-                  </StyledEventContent>
-                </StyledEventItem>
-              </Link>
-            ))}
+            {eventsData?.map((event) => {
+              const date = getFormattedDate(event.customerDate);
+              return (
+                <Link href={`/event?id=${event.id}`} key={event.id}>
+                  <StyledEventItem>
+                    <StyledMainImage
+                      src={event.images[0]}
+                      width={200}
+                      height={200}
+                      alt={event.title}
+                    />
+                    <StyledEventContent>
+                      <StyledEventTitle>{event.title}</StyledEventTitle>
+                      <StyledEventDescription>
+                        {event.shortDescription}
+                      </StyledEventDescription>
+                      <StyledEventDate>{date}</StyledEventDate>
+                    </StyledEventContent>
+                  </StyledEventItem>
+                </Link>
+              );
+            })}
           </StyledEventList>
         </StyledContent>
       </StyledContainer>

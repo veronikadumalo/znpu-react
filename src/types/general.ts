@@ -64,6 +64,7 @@ export interface Event {
   images: string[];
   type: EventType;
   createdAt: string;
+  customerDate: string;
 }
 export type EventType =
   | "course"

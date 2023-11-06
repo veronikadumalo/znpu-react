@@ -7,9 +7,12 @@ import { useForm } from "react-hook-form";
 import { uploadPhoto } from "../../utils/uploadPhoto";
 import Image from "next/image";
 import trashIcon from "../../assets/images/trash-icon.svg";
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { CREATE_EVENT } from "../../graphql/mutation/createEvent";
 import { setGlobalState } from "../../context/state";
+import { UPDATE_EVENT } from "../../graphql/mutation/updateEvent";
+import { EVENTS_BY_ID } from "../../graphql/query/eventById";
+import { Event } from "../../types/general";
 
 const StyledContent = styled.div`
   padding: 30px;
@@ -88,23 +91,38 @@ const StyledIconButton = styled.button`
   right: 10px;
 `;
 
-export default function AddNewEvent() {
+export default function EditEvent() {
   const router = useRouter();
-  const [eventType, setEventType] = useState<string | undefined>(undefined);
-  const [pageTitle, setPageTitle] = useState<string | undefined>(undefined);
-  const { register, handleSubmit, getValues } = useForm();
+  const [eventData, setEventData] = useState<Event | undefined>(undefined);
+  const { register, handleSubmit, getValues, setValue } = useForm();
   const [imageFiles, setImageFiles] = useState<string[] | []>([]);
-  const [createEvent, { loading }] = useMutation(CREATE_EVENT, {
+  const [updateEvent, { loading }] = useMutation(UPDATE_EVENT, {
     onCompleted: (data) => {
       if (!data) return;
-      router.back();
+      alert("Зміни збережено");
     },
   });
+  const [eventsById, { loading: eventByIdLoading }] = useLazyQuery(
+    EVENTS_BY_ID,
+    {
+      onCompleted: (data) => {
+        if (!data) return;
+        const event = data.eventsById[0];
+        setEventData(event);
+        setValue("title", event.title);
+        setValue("longDesc", event.longDescription);
+        setValue("shortDesc", event.shortDescription);
+        setValue("customerDate", event.customerDate.replace(" 00:00:00", ""));
+        setImageFiles([...event.images]);
+      },
+    }
+  );
 
   const onSubmit = () => {
-    createEvent({
+    updateEvent({
       variables: {
-        type: eventType,
+        id: eventData?.id,
+        type: eventData?.type,
         title: getValues("title"),
         images: [...imageFiles],
         longDescription: getValues("longDesc"),
@@ -116,19 +134,14 @@ export default function AddNewEvent() {
 
   useEffect(() => {
     if (!router) return;
-    const type = router.query.eventType;
-    setEventType(String(type));
+    const id = router.query.id;
+    eventsById({ variables: { id: String(id) } });
+    // setEventType(String(type));
   }, [router]);
 
   useEffect(() => {
-    if (!eventType) return;
-    const title = getEventTitle(eventType);
-    setPageTitle(title);
-  }, [eventType]);
-
-  useEffect(() => {
-    setGlobalState("isLoading", loading);
-  }, [loading]);
+    setGlobalState("isLoading", loading || eventByIdLoading);
+  }, [loading, eventByIdLoading]);
 
   const handleFileSelect = async (file?: File) => {
     if (!file) return;
@@ -153,7 +166,7 @@ export default function AddNewEvent() {
   };
 
   return (
-    <PanelLayout pageTitle={pageTitle || ""}>
+    <PanelLayout pageTitle={eventData?.title || ""}>
       <StyledContent>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <StyledFormItem>
@@ -232,7 +245,7 @@ export default function AddNewEvent() {
           <label id="file-input-label" htmlFor="file-input">
             Додати нове зображення
           </label>{" "}
-          <StyledButton type="submit">Додати новий</StyledButton>
+          <StyledButton type="submit">Зберегти зміни</StyledButton>
         </StyledForm>
       </StyledContent>
     </PanelLayout>

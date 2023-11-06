@@ -2,12 +2,13 @@ import { gql } from "@apollo/client";
 
 export const UPDATE_EVENT = gql`
   mutation UpdateEvent(
-    $customerDate: String
-    $images: [String]
+    $customerDate: String!
+    $images: [String!]!
     $longDescription: String!
     $shortDescription: String!
     $title: String!
     $type: String!
+    $id: String!
   ) {
     updateEvent(
       customerDate: $customerDate
@@ -16,6 +17,7 @@ export const UPDATE_EVENT = gql`
       shortDescription: $shortDescription
       title: $title
       type: $type
+      id: $id
     ) {
       createdAt
       customerDate
