@@ -139,7 +139,7 @@ export default function EditUkrainianLaw() {
       <StyledContent>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <StyledFormItem>
-            <StyledLabel>Заголовок:</StyledLabel>
+            <StyledLabel>Назва файла:</StyledLabel>
             <StyledInput
               id={"title"}
               {...register("title")}
