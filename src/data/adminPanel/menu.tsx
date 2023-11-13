@@ -51,6 +51,10 @@ export const ADMIN_PANEL_MENU: AdminPanelMenu[] = [
     ],
   },
   {
+    title: "Studia podyplomowe",
+    link: "/admin-panel/edit-postgraduate-studies",
+  },
+  {
     title: "Wydarzenia",
     link: "/admin-panel/menu",
     submenu: [
