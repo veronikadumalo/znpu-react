@@ -86,14 +86,16 @@ const StyledIconButton = styled.button`
   right: 10px;
 `;
 
-export default function EditBuildingRenovation() {
+export default function EditMuzeumBS() {
   const { register, handleSubmit, getValues, setValue } = useForm();
   const [eventDate, setEventDate] = useState<Event | undefined>(undefined);
   const [eventsByType, { loading }] = useLazyQuery(EVENTS_BY_TYPE, {
+    fetchPolicy: "network-only",
     onCompleted: (data) => {
       if (!data) return;
       setEventDate(data.eventsByType[0]);
       setValue("title", data.eventsByType[0].title);
+      setValue("longDesc", data.eventsByType[0].longDescription);
     },
   });
   const [updateEvent, { loading: updateEventLoading }] = useMutation(
@@ -110,10 +112,10 @@ export default function EditBuildingRenovation() {
     updateEvent({
       variables: {
         id: eventDate?.id,
-        type: "buildingRenovation",
+        type: "muzeumBS",
         title: getValues("title"),
         images: eventDate?.images,
-        longDescription: "string",
+        longDescription: getValues("longDesc"),
         shortDescription: "string",
         customerDate: "string",
       },
@@ -121,7 +123,7 @@ export default function EditBuildingRenovation() {
   };
 
   useEffect(() => {
-    eventsByType({ variables: { type: "buildingRenovation" } });
+    eventsByType({ variables: { type: "muzeumBS" } });
   }, []);
 
   useEffect(() => {
@@ -151,7 +153,7 @@ export default function EditBuildingRenovation() {
   };
 
   return (
-    <PanelLayout pageTitle={"Remont budynku"}>
+    <PanelLayout pageTitle={"Muzeum 'Izba pamięci Bruna Schulza'"}>
       <StyledContent>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <StyledFormItem>
@@ -160,8 +162,17 @@ export default function EditBuildingRenovation() {
               id={"title"}
               {...register("title")}
               required={true}
-              placeholder="Заголовок на сторінці:"
+              placeholder="Заголовок на сторінці"
               type={"text"}
+            />
+          </StyledFormItem>
+          <StyledFormItem>
+            <StyledLabel>Опис:</StyledLabel>
+            <StyledTextarea
+              id={"longDesc"}
+              {...register("longDesc")}
+              required={true}
+              placeholder="Опис"
             />
           </StyledFormItem>
           {eventDate?.images && (

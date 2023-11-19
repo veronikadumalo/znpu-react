@@ -61,6 +61,13 @@ export interface HomePageInfo {
   type: string;
 }
 
+export interface FileData {
+  id: string;
+  subcategoryId: string;
+  title: string;
+  url: string;
+}
+
 export interface Event {
   id: string;
   title: string;

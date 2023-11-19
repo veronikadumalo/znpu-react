@@ -26,8 +26,8 @@ const StyledPageNumber = styled.p`
 
 interface SliderNavigationProps {
   activeIndex: number;
-  handleNextClick: () => void;
-  handlePrevClick: () => void;
+  handleNextClick: (e: any) => void;
+  handlePrevClick: (e: any) => void;
   pageLength: number | null;
 }
 

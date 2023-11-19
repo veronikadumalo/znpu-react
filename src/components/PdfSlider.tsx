@@ -54,7 +54,8 @@ const PdfSlider = ({ pdfFile }: PdfSliderProps) => {
     setNumPages(pdf?._pdfInfo?.numPages || 0);
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = (e: any) => {
+    e.preventDefault();
     if (!numPages) return;
     setPageNumber((prev) => {
       if (prev < numPages) {
@@ -63,7 +64,8 @@ const PdfSlider = ({ pdfFile }: PdfSliderProps) => {
     });
   };
 
-  const handlePrevClick = () => {
+  const handlePrevClick = (e: any) => {
+    e.preventDefault();
     if (!numPages) return;
     setPageNumber((prev) => {
       if (prev >= 2) {
@@ -90,8 +92,8 @@ const PdfSlider = ({ pdfFile }: PdfSliderProps) => {
       <SliderNavigation
         activeIndex={pageNumber}
         pageLength={numPages}
-        handleNextClick={handleNextClick}
-        handlePrevClick={handlePrevClick}
+        handleNextClick={(e) => handleNextClick(e)}
+        handlePrevClick={(e) => handlePrevClick(e)}
       />
     </StyledContainer>
   );

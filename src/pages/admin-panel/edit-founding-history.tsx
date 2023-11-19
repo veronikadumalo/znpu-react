@@ -153,7 +153,7 @@ export default function EditFoundingHistory() {
   };
 
   return (
-    <PanelLayout pageTitle={"Dodawanie nowej aktualności"}>
+    <PanelLayout pageTitle={"Historia"}>
       <StyledContent>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <StyledFormItem>

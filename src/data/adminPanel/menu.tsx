@@ -55,6 +55,32 @@ export const ADMIN_PANEL_MENU: AdminPanelMenu[] = [
     link: "/admin-panel/edit-postgraduate-studies",
   },
   {
+    title: "Dziedzictwo kulturowe",
+    link: "/admin-panel/menu",
+    submenu: [
+      {
+        title: "Muzeum Aleksandra Fredry",
+        link: "/admin-panel/edit-muzeum-af",
+      },
+      {
+        title: "Wystawa obrazów",
+        link: "/admin-panel/edit-image-exhibition",
+      },
+      {
+        title: "MUZEUM 'IZBA PAMIĘCI BRUNO SCHULZA'",
+        link: "/admin-panel/edit-muzeum-bs",
+      },
+      {
+        title: "SŁOWNIK LITERATÓW POLSKICH",
+        link: "/admin-panel/edit-dictionary-of-polisg-writers",
+      },
+      {
+        title: "CMENTARZ",
+        link: "/admin-panel/edit-cmentary",
+      },
+    ],
+  },
+  {
     title: "Wydarzenia",
     link: "/admin-panel/menu",
     submenu: [

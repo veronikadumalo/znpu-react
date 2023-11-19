@@ -151,7 +151,7 @@ export default function EditBuildingAdaptation() {
   };
 
   return (
-    <PanelLayout pageTitle={"Dodawanie nowej aktualności"}>
+    <PanelLayout pageTitle={"Adaptacja budynku"}>
       <StyledContent>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <StyledFormItem>
