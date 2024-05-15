@@ -115,15 +115,23 @@ export default function EditPost() {
         subtitle: getValues("subtitle"),
         description: getValues("description"),
         id: selectedPost?.id,
-        imageUrl: "string",
+        imageUrl: selectedFile
+          ? `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.eu-central-1.amazonaws.com/${selectedFile.name}`
+          : selectedPost?.imageUrl,
       },
     });
   };
 
+  const generateRandom = () =>
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(23).substring(2, 5);
+
   const handleFileSelect = async (file?: File) => {
-    const result = uploadPhoto(file);
+    const test = generateRandom();
+    const myNewFile = file && new File([file], test, { type: file.type });
+    const result = uploadPhoto(myNewFile);
     if (await result) {
-      setSelectedFile(file);
+      setSelectedFile(myNewFile);
     }
   };
 

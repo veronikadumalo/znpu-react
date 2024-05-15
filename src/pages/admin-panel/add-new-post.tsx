@@ -98,10 +98,16 @@ export default function EditPost() {
     setGlobalState("isLoading", loading);
   }, [loading]);
 
+  const generateRandom = () =>
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(23).substring(2, 5);
+
   const handleFileSelect = async (file?: File) => {
-    const result = uploadPhoto(file);
+    const test = generateRandom();
+    const myNewFile = file && new File([file], test, { type: file.type });
+    const result = uploadPhoto(myNewFile);
     if (await result) {
-      setSelectedFile(file);
+      setSelectedFile(myNewFile);
     }
   };
   return (

@@ -130,13 +130,17 @@ export default function AddNewEvent() {
     setGlobalState("isLoading", loading);
   }, [loading]);
 
+  const generateRandom = () =>
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(23).substring(2, 5);
+
   const handleFileSelect = async (file?: File) => {
     if (!file) return;
-    const result = uploadPhoto(file);
+    const test = generateRandom();
+    const myNewFile = file && new File([file], test, { type: file.type });
+    const result = uploadPhoto(myNewFile);
     if (await result) {
-      const newImageURL = `https://${
-        process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME
-      }.s3.eu-central-1.amazonaws.com/${encodeURIComponent(file.name)}`;
+      const newImageURL = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.eu-central-1.amazonaws.com/${test}`;
       setImageFiles((prev) => {
         if (!prev) {
           return [newImageURL];
