@@ -118,6 +118,7 @@ export default function EditPost() {
         imageUrl: selectedFile
           ? `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.eu-central-1.amazonaws.com/${selectedFile.name}`
           : selectedPost?.imageUrl,
+        updatedAt: getValues("customerDate"),
       },
     });
   };
@@ -151,6 +152,7 @@ export default function EditPost() {
     setValue("title", selectedPost.title);
     setValue("subtitle", selectedPost.subtitle);
     setValue("description", selectedPost.description);
+    setValue("customerDate", selectedPost?.updatedAt);
   }, [selectedPost]);
   return (
     <PanelLayout
@@ -187,6 +189,15 @@ export default function EditPost() {
               {...register("description")}
               required={true}
               placeholder="Oпис"
+            />
+          </StyledFormItem>
+          <StyledFormItem>
+            <StyledLabel>Дата (у форматі рррр-мм-дд):</StyledLabel>
+            <StyledInput
+              id={"customerDate"}
+              {...register("customerDate")}
+              required={true}
+              placeholder="Дата (у форматі рррр-мм-дд):"
             />
           </StyledFormItem>
           <StyledImageContainer>

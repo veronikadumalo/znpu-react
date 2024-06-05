@@ -149,8 +149,6 @@ export default function EditEvents() {
         <StyledEventList>
           {eventsData?.map((event) => {
             const date = getFormattedDate(event.customerDate);
-            console.log(event.customerDate);
-            console.log(date);
             return (
               <StyledEventContainer key={event.id}>
                 <StyledEventItem>

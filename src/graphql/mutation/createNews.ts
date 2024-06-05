@@ -6,18 +6,21 @@ export const CREATE_NEWS = gql`
     $imageUrl: String!
     $subtitle: String!
     $title: String!
+    $updatedAt: Date!
   ) {
     createNews(
       description: $description
       imageUrl: $imageUrl
       subtitle: $subtitle
       title: $title
+      updatedAt: $updatedAt
     ) {
       description
       id
       imageUrl
       subtitle
       title
+      updatedAt
     }
   }
 `;

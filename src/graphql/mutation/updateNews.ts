@@ -7,6 +7,7 @@ export const UPDATE_NEWS = gql`
     $subtitle: String!
     $title: String!
     $id: String!
+    $updatedAt: Date!
   ) {
     updateNews(
       description: $description
@@ -14,12 +15,14 @@ export const UPDATE_NEWS = gql`
       subtitle: $subtitle
       title: $title
       id: $id
+      updatedAt: $updatedAt
     ) {
       description
       id
       imageUrl
       subtitle
       title
+      updatedAt
     }
   }
 `;

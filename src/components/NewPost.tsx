@@ -2,15 +2,17 @@ import styled from "styled-components";
 import { Post } from "../types/general";
 import Image from "next/image";
 import imagePlaceholder from "../assets/images/test-image.png";
+import Link from "next/link";
 
 interface NewPostProps {
   post: Post;
 }
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(Link)`
   display: flex;
   padding: 30px 0;
   border-bottom: 1px solid var(--grey);
+  text-decoration: none;
   &:last-child {
     border: none;
   }
@@ -40,7 +42,7 @@ const StyledDate = styled.p`
 `;
 
 export const NewPost = ({ post }: NewPostProps) => (
-  <StyledContainer>
+  <StyledContainer href={`/post?id=${post.id}`}>
     <StyledImage
       src={post.imageUrl ? post.imageUrl : imagePlaceholder}
       alt={post.title}
