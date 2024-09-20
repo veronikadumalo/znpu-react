@@ -31,6 +31,8 @@ export const uploadPhoto = async (file?: File) => {
     // @ts-ignore
     formData.append(key, value);
   });
+  console.log(file);
+  console.log(formData);
   try {
     const fileRes = await fetch(post.url, {
       method: "POST",

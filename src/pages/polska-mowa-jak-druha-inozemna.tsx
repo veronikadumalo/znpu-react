@@ -3,6 +3,11 @@ import FileLink from "../components/FileLink";
 import Layout from "../components/Layout";
 import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
+import { useEffect, useState } from "react";
+import { FileData } from "../types/general";
+import { useLazyQuery } from "@apollo/client";
+import { FILE_BY_SUBCATEGORY } from "../graphql/query/fileBySubcategory";
+import { setGlobalState } from "../context/state";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -15,16 +20,31 @@ const StyledContent = styled.div`
 `;
 
 function PolishLanguage() {
+  const [files, setFiles] = useState<FileData[] | []>([]);
+  const [filesBySubcategory, { loading }] = useLazyQuery(FILE_BY_SUBCATEGORY, {
+    onCompleted: (data) => {
+      const newFiles = [...data.filesBySubcategory].sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
+      setFiles(newFiles);
+    },
+  });
+  useEffect(() => {
+    filesBySubcategory({
+      variables: { subcategoryId: "66e91f69a08bad60fe3d115a" },
+    });
+  }, []);
+  useEffect(() => {
+    setGlobalState("isLoading", loading);
+  }, [loading]);
   return (
     <Layout>
       <StyledContainer>
         <SubMenu submenuItems={NAVIGATION[4].subpages} />
         <StyledContent>
-          <FileLink
-            isFileDownload={false}
-            fileLink="/Druha.inoz.mov.5-9-kl.Redko.ta.in.14.07.pdf"
-            title="Модельна навчальна програма «Друга іноземна мова. 5-9 класи» для закладів загальної середньої освіти (автори Редько В. Г., Шаленко О. П., Сотникова С. І., Коваленко О. Я., Коропецька І. Б., Якоб О. М., Самойлюкевич І. В., Добра О. М., Кіор Т. М., Мацькович М. Р., Глинюк Л. М., Браун Є. Л.)"
-          />
+          {files.map(({ title, url }) => (
+            <FileLink key={title} fileLink={url} title={title} />
+          ))}
         </StyledContent>
       </StyledContainer>
     </Layout>

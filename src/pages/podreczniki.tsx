@@ -3,7 +3,11 @@ import FileLink from "../components/FileLink";
 import Layout from "../components/Layout";
 import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
-import { BOOKS } from "../data/teachingMaterial/books";
+import { FileData } from "../types/general";
+import { useEffect, useState } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { FILE_BY_SUBCATEGORY } from "../graphql/query/fileBySubcategory";
+import { setGlobalState } from "../context/state";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -20,17 +24,30 @@ const StyledContent = styled.div`
 `;
 
 function Workbooks() {
+  const [files, setFiles] = useState<FileData[] | []>([]);
+  const [filesBySubcategory, { loading }] = useLazyQuery(FILE_BY_SUBCATEGORY, {
+    onCompleted: (data) => {
+      const newFiles = [...data.filesBySubcategory].sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
+      setFiles(newFiles);
+    },
+  });
+  useEffect(() => {
+    filesBySubcategory({
+      variables: { subcategoryId: "66e91f69a08bad60fe3d115e" },
+    });
+  }, []);
+  useEffect(() => {
+    setGlobalState("isLoading", loading);
+  }, [loading]);
   return (
     <Layout>
       <StyledContainer>
         <SubMenu submenuItems={NAVIGATION[5].subpages} />
         <StyledContent>
-          {BOOKS.map((book) => (
-            <FileLink
-              key={book.title}
-              fileLink={book.link}
-              title={book.title}
-            />
+          {files.map((file) => (
+            <FileLink key={file.title} fileLink={file.url} title={file.title} />
           ))}
         </StyledContent>
       </StyledContainer>

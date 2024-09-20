@@ -34,7 +34,7 @@ function Cmentarz() {
   });
   useEffect(() => {
     filesBySubcategory({
-      variables: { subcategoryId: "b704e3fa-6a4d-4c8b-a0b5-0bcb9f04566d" },
+      variables: { subcategoryId: "66e91f69a08bad60fe3d1152" },
     });
   }, []);
   useEffect(() => {

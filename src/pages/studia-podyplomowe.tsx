@@ -108,13 +108,15 @@ const StudiaPodyplomowe = () => {
       <StyledContainer>
         <StyledContent>
           {pageData?.title && <StyledTitle>{pageData?.title}</StyledTitle>}
-          <StyledDescription>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: String(pageData?.longDescription),
-              }}
-            />
-          </StyledDescription>
+          {pageData?.longDescription && (
+            <StyledDescription>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: String(pageData?.longDescription),
+                }}
+              />
+            </StyledDescription>
+          )}
           {pageData?.images && (
             <>
               <Swiper

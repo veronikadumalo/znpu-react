@@ -9,6 +9,7 @@ import { FileData } from "../types/general";
 import { useLazyQuery } from "@apollo/client";
 import { FILE_BY_SUBCATEGORY } from "../graphql/query/fileBySubcategory";
 import { setGlobalState } from "../context/state";
+import { FILES_BY_SUBCATEGORY_NAME } from "../graphql/query/fileBySubcategoryName";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -26,15 +27,18 @@ const StyledContent = styled.div`
 
 function WystawaObrazow() {
   const [file, setFile] = useState<FileData | undefined>(undefined);
-  const [filesBySubcategory, { loading }] = useLazyQuery(FILE_BY_SUBCATEGORY, {
-    onCompleted: (data) => {
-      const newFile = data.filesBySubcategory[0];
-      setFile(newFile);
-    },
-  });
+  const [filesBySubcategoryName, { loading }] = useLazyQuery(
+    FILES_BY_SUBCATEGORY_NAME,
+    {
+      onCompleted: (data) => {
+        const newFile = data.filesBySubcategoryName[0];
+        setFile(newFile);
+      },
+    }
+  );
   useEffect(() => {
-    filesBySubcategory({
-      variables: { subcategoryId: "97e5b88e-8c5a-492a-9350-bcdcb3925ecf" },
+    filesBySubcategoryName({
+      variables: { subcategoryName: "WYSTAWA OBRAZÓW" },
     });
   }, []);
   useEffect(() => {

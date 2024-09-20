@@ -136,11 +136,15 @@ export default function AddNewEvent() {
 
   const handleFileSelect = async (file?: File) => {
     if (!file) return;
-    const test = generateRandom();
-    const myNewFile = file && new File([file], test, { type: file.type });
+    const newFileName = generateRandom();
+    const myNewFile =
+      file &&
+      new File([file], `${newFileName}.${file.name.split(".")[1]}`, {
+        type: file.type,
+      });
     const result = uploadPhoto(myNewFile);
     if (await result) {
-      const newImageURL = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.eu-central-1.amazonaws.com/${test}`;
+      const newImageURL = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.eu-central-1.amazonaws.com/${myNewFile.name}`;
       setImageFiles((prev) => {
         if (!prev) {
           return [newImageURL];

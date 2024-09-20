@@ -106,4 +106,74 @@ export const ADMIN_PANEL_MENU: AdminPanelMenu[] = [
       },
     ],
   },
+  {
+    title: "Programy",
+    link: "/admin-panel/menu",
+    submenu: [
+      {
+        title: "Школи з класами польською мовою навчання",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1158&title=Школи з класами польською мовою навчання",
+      },
+      {
+        title: "Польська мова як рідна у школі з українською мовою навчання",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1159&title=Польська мова як рідна у школі з українською мовою навчання",
+      },
+      {
+        title: "Польська мова як друга іноземна",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d115a&title=Польська мова як друга іноземна",
+      },
+      {
+        title: "Факультативні заняття з польської мови",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d115b&title=Факультативні заняття з польської мови",
+      },
+    ],
+  },
+  {
+    title: "Materiały dydaktyczne",
+    link: "/admin-panel/menu",
+    submenu: [
+      {
+        title: "Podręczniki",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d115e&title=Podręczniki",
+      },
+      {
+        title: "Prezentacje",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d115f&title=Prezentacje",
+      },
+      {
+        title: "Scenariuszy uroczystości",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1160&title=Scenariuszy uroczystości",
+      },
+      {
+        title: "Календарно-тематичне планування",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1161&title=Календарно-тематичне планування",
+      },
+      {
+        title: "Збірник диктантів/переказів",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1162&title=Збірник диктантів/переказів",
+      },
+    ],
+  },
+  {
+    title: "Szkoły sobotnie",
+    link: "/admin-panel/menu",
+    submenu: [
+      {
+        title: "ПОЛОЖЕННЯ ПРО КУЛЬТУРНО- ОСВІТНІЙ ЗАКЛАД",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1163&title=ПОЛОЖЕННЯ ПРО КУЛЬТУРНО- ОСВІТНІЙ ЗАКЛАД",
+      },
+      {
+        title: "ЯК ЗАРЕЄСТРУВАТИ",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1164&title=ЯК ЗАРЕЄСТРУВАТИ",
+      },
+      {
+        title: "KONSPEKTY LEKCJI DLA SZKÓŁ SOBOTNICH",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1165&title=KONSPEKTY LEKCJI DLA SZKÓŁ SOBOTNICH",
+      },
+      {
+        title: "ПРОГРАМИ",
+        link: "/admin-panel/edit-file-list?subcategoryId=66e91f69a08bad60fe3d1166&title=ПРОГРАМИ",
+      },
+    ],
+  },
 ];

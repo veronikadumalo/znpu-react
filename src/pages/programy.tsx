@@ -2,8 +2,12 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 import { SubMenu } from "../components/SubMenu";
 import { NAVIGATION } from "../data/navigation";
-import { PROGRAMS } from "../data/saturdaySchools/programs";
 import FileLink from "../components/FileLink";
+import { useEffect, useState } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { FILE_BY_SUBCATEGORY } from "../graphql/query/fileBySubcategory";
+import { setGlobalState } from "../context/state";
+import { FileData } from "../types/general";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -20,17 +24,30 @@ const StyledContent = styled.div`
 `;
 
 const Programs = () => {
+  const [files, setFiles] = useState<FileData[] | []>([]);
+  const [filesBySubcategory, { loading }] = useLazyQuery(FILE_BY_SUBCATEGORY, {
+    onCompleted: (data) => {
+      const newFiles = [...data.filesBySubcategory].sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
+      setFiles(newFiles);
+    },
+  });
+  useEffect(() => {
+    filesBySubcategory({
+      variables: { subcategoryId: "66e91f69a08bad60fe3d1166" },
+    });
+  }, []);
+  useEffect(() => {
+    setGlobalState("isLoading", loading);
+  }, [loading]);
   return (
     <Layout>
       <StyledContainer>
         <SubMenu submenuItems={NAVIGATION[6].subpages} />
         <StyledContent>
-          {PROGRAMS.map((file) => (
-            <FileLink
-              key={file.title}
-              fileLink={file.link}
-              title={file.title}
-            />
+          {files.map((file) => (
+            <FileLink key={file.id} fileLink={file.url} title={file.title} />
           ))}
         </StyledContent>
       </StyledContainer>

@@ -9,6 +9,7 @@ import { uploadPhoto } from "../../utils/uploadPhoto";
 import { FILE_BY_SUBCATEGORY } from "../../graphql/query/fileBySubcategory";
 import { UPDATE_FILE } from "../../graphql/mutation/updateFile";
 import PdfSlider from "../../components/PdfSlider";
+import { FILES_BY_SUBCATEGORY_NAME } from "../../graphql/query/fileBySubcategoryName";
 
 const StyledContent = styled.div`
   padding: 30px;
@@ -64,14 +65,18 @@ const StyledButton = styled.button`
 export default function Page() {
   const { register, handleSubmit, getValues, setValue } = useForm();
   const [fileData, setFileData] = useState<FileData | undefined>(undefined);
-  const [fileBySubcategory, { loading }] = useLazyQuery(FILE_BY_SUBCATEGORY, {
-    fetchPolicy: "network-only",
-    onCompleted: (data) => {
-      if (!data) return;
-      setFileData(data.filesBySubcategory[0]);
-      setValue("title", data.filesBySubcategory[0].title);
-    },
-  });
+  const [fileBySubcategoryName, { loading }] = useLazyQuery(
+    FILES_BY_SUBCATEGORY_NAME,
+    {
+      fetchPolicy: "network-only",
+      onCompleted: (data) => {
+        if (!data) return;
+        console.log(data);
+        setFileData(data.filesBySubcategoryName[0]);
+        setValue("title", data.filesBySubcategoryName[0].title);
+      },
+    }
+  );
   const [updateFile, { loading: updateFileLoading }] = useMutation(
     UPDATE_FILE,
     {
@@ -87,15 +92,15 @@ export default function Page() {
       variables: {
         id: fileData?.id,
         title: getValues("title"),
-        subcategoryId: "97e5b88e-8c5a-492a-9350-bcdcb3925ecf",
+        subcategoryId: "66e91f69a08bad60fe3d114f",
         url: fileData?.url,
       },
     });
   };
 
   useEffect(() => {
-    fileBySubcategory({
-      variables: { subcategoryId: "97e5b88e-8c5a-492a-9350-bcdcb3925ecf" },
+    fileBySubcategoryName({
+      variables: { subcategoryName: "WYSTAWA OBRAZÓW" },
     });
   }, []);
 
@@ -118,7 +123,6 @@ export default function Page() {
       setFileData(newFileDate);
     }
   };
-  console.log(fileData);
 
   return (
     <PanelLayout pageTitle={"Wystawa obrazów"}>

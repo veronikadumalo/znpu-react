@@ -103,6 +103,7 @@ const MuzeumAleksandraFresry = () => {
   useEffect(() => {
     setGlobalState("isLoading", loading);
   }, [loading]);
+  console.log(pageData);
   return (
     <Layout>
       <StyledContainer>
@@ -139,21 +140,23 @@ const MuzeumAleksandraFresry = () => {
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <Swiper
-                onSwiper={setThumbsSwiper}
-                spaceBetween={10}
-                slidesPerView={4}
-                freeMode={true}
-                watchSlidesProgress={true}
-                modules={[FreeMode, Navigation, Thumbs]}
-                className="mySwiper"
-              >
-                {pageData?.images.map((image) => (
-                  <SwiperSlide>
-                    <Image src={image} alt="Test" width={300} height={300} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+              {pageData?.images && pageData?.images.length > 0 && (
+                <Swiper
+                  onSwiper={setThumbsSwiper}
+                  spaceBetween={10}
+                  slidesPerView={4}
+                  freeMode={true}
+                  watchSlidesProgress={true}
+                  modules={[FreeMode, Navigation, Thumbs]}
+                  className="mySwiper"
+                >
+                  {pageData?.images.map((image) => (
+                    <SwiperSlide>
+                      <Image src={image} alt="Test" width={300} height={300} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
             </>
           )}
         </StyledContent>
